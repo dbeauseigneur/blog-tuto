@@ -1,19 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Mon site perso{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+    {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#navbar-menubuilder" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">
+                    <img alt="Avis et aide d\'un développeur| Blog et tuto"
+                         src="{{ asset('images/logo-lafolleagence-web.png') }}">
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right" id="navbar-menubuilder">
+                <ul class="nav navbar-nav">
+                    <li><!--<a href="{# { path('perso_a-propos') } #}">-->A propos<!--</a>--></li>
+                    <li><!--<a href="{# { path('perso_a-tutos') } #}">-->Tutos<!--</a>--></li>
+                    <li><!--<a href="{# { path('perso_blog') } #}">-->Blog<!--</a>--></li>
+                    <li><!--<a href="{# { path('perso_qui-suis-je') } #}">-->Qui suis-je<!--</a>--></li>
+                    <li><!--<a href="{# { path('perso_contact') } #}">-->Contact<!--</a>--></li>
+                </ul>
+
+                <!-- social media icons -->
+                <ul class="nav navbar-nav social-icons">
+                    <li class="social-media"><a href="https://fr-fr.facebook.com/LaFolleAgence/"><i
+                                    class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li class="social-media"><a href="https://twitter.com/lafolleagence/"><i class="fa fa-twitter"
+                                                                                             aria-hidden="true"></i></a>
+                    </li>
+                    <li class="social-media"><a href="http://www.justine-remaudiere.com/"><i class="fa fa-linkedin"
+                                                                                             aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+            </div><!-- End collapse navbar-->
+        </div><!-- End container -->
+    </div><!-- End container fluid-->
+</nav><!-- End navbar-->
+
+{% block body %}
+    <div class="col-xs-2 col-xs-offset-9 col-sm-1 col-sm-offset-11" id="scroll-top-button">
+        <a href="#header-index" id="scroll-top-arrow">
+            <img src="../public/images/scroll-down-la-folle-agence-lyon.png"
+                 alt="Remontez en haut de la page d'accueil">
+        </a>
+    </div>{% endblock %}
+</body>
 </html>
