@@ -1,0 +1,113 @@
+{% extends 'base-arrow.html.twig' %}
+
+{% block title %}La Folle Agence | Les actualités de l'agence{% endblock %}
+{% block body %}
+    <header>
+        <!-- Menu de navigation -->
+        <?php include('../src/nav.php'); ?>
+        <section class="container-fluid scrolling" id="blog-header">
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-md-offset-2 page-header-style">
+                    <h1>Les actus de <span>La Folle Agence</span></h1>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <!-- Bandeau de couleur -->
+    <section class="bandeau container-fluid"></section>
+
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 col-md-offset-1">
+
+                    {% for post in post %}
+                        <h2>
+                            <a href="{{ path('article_blog',{ 'link': post.link }) }}">{{ post.title }}</a>
+                        </h2>
+
+                        <hr>
+                        <p>
+                            <span class="glyphicon glyphicon-time"></span> {{ post.publicationDate|format_datetime('short', 'none') }}
+                        </p>
+
+                        {{ post.content|striptags|u.truncate(800)|raw }}
+                        <p></p>
+                        <a class="btn btn-primary" href="{{ path('article_blog', { 'link': post.link }) }}">Lire la
+                            suite <span
+                                    class="glyphicon glyphicon-chevron-right"></span></a>
+                    {% endfor %}
+
+                    <!-- Pager -->
+
+                    <ul class="pager">
+                        <li class="previous">
+                            {% if page > 1 %}
+                                <a href="{{ path('blog', {'page': page - 1}) }}">
+                                    Plus récent
+                                </a>
+                            {% endif %}
+                        </li>
+                        <li class="next">
+                            {% if page < maxPage %}
+                                <a href="{{ path('blog', {'page': page + 1}) }}">
+                                    Plus ancien
+                                </a>
+                            {% endif %}
+                        </li>
+                    </ul>
+
+
+                </div>
+
+                <!-- Blog Sidebar Widgets Column -->
+                <div class="col-md-3 blog-cat">
+
+                    <!-- Blog Categories Well -->
+                    <div class="well col-xs-12 col-sm-5 col-md-12">
+                        <h4>Catégories</h4>
+                        <div class="row">
+                            {% for category in categories %}
+                                <div class="col-lg-12">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a href="{{ path('category_blog',{'slug': category.slug }) }}">{{ category.categoryName }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <!-- /.row -->
+                    </div>
+
+
+                    <!-- Side Widget Well -->
+                    <div class="well col-xs-12 col-sm-7 col-md-12" id="archives">
+                        <h4>Archives</h4>
+                        {# Init var year #}
+                        {% set year = '9999' %}
+                        {# Loop for each post in archive #}
+                        {% for post in archive %}
+                        {# Test the current post year #}
+                        {% if post.publicationDate|date('Y') < year %}
+                        {# Test for close list not for the first time #}
+                        {% if year != '9999' %}
+                            </ul>
+                        {% endif %}
+                        <ul class="list-unstyled">
+                            <p>{{ post.publicationDate|date('Y') }}</p>
+                            {% set year = post.publicationDate|date('Y') %}
+                            {% endif %}
+                            <li><a href="{{ path('article_blog',{ 'link': post.link }) }}">{{ post.title }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+{% endblock %}

@@ -1,0 +1,171 @@
+{% extends 'base-arrow.html.twig' %}
+{% block title %}La Folle Agence | Votre communication numérique autrement !{% endblock %}
+{% block body %}
+    <header class="container-fluid scrolling" id="header-index">
+        <div class="col-xs-12 col-md-10 col-md-offset-1">
+            <img src="{{ asset('images/logo-lafolleagence-web.png') }}" id="logo-hook">
+            <h1>Votre communication numérique autrement !</h1>
+            <a id="anchor" href="#agence-pres"><img id="fleche-descendre"
+                                                    src="{{ asset('images/fleche-blanche-la-folle-agence-lyon.png') }}"></a>
+        </div>
+    </header>
+
+    <!-- Bandeau de couleur -->
+    <section class="container-fluid bandeau"></section>
+
+    <!-- Présentation de la folle agence -->
+    <section class="container-fluid white" id="agence-pres">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <h2>Qui se cache derrière la Folle Agence ?</h2>
+                <hr>
+
+                <div class="col-xs-12 col-md-6">
+                    <img src="{{ asset('images/justine-remaudiere-la-folle-agence-lyon.png') }}"
+                         id="justine-remaudiere">
+                </div>
+
+                <div class="col-xs-12 col-md-6 text-pres">
+                    <p>Community Manager, Blogueuse, un grain de folie sous le soleil lyonnais, passionnée du web, de
+                        communication, de musique, de voyages, de bons plats.<br></p>
+                    <p>Adhérente de La Cuisine Du Web, membre du CA du Club des Community Manager de Lyon, passionnée
+                        par Museomix et Les Ateliers Objets Connectés. <br></p>
+                    <p>Dans une précédente vie, j'ai également évolué dans le domaine de la téléphonie mobile (Content
+                        Manager et Community Manager pour des marques comme Orange UK ou encore Playboy).</p>
+                    <p><a href="{{ path('lafolleagence_a-propos') }}">Lire la suite</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forme triangle en SVG -->
+    <section class="container-fluid triangle-down">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 5" class="row" preserveAspectRatio="xMinYMin meet">
+            <title>Triangle pointe sections blanches</title>
+            <polygon points="50 3, 100 0, 0 0" fill="rgba(255,255,255,1)"/>
+        </svg>
+    </section>
+
+    <!-- Services proposés par la folle agence -->
+    <section class="container-fluid grey" id="services">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <h2>Les prestations proposées</h2>
+                <hr>
+
+                <div id="services-items">
+                    <div class="row">
+                        <div class="grid">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <figure class="effect-sadie">
+                                    <img src="{{ asset('images/service-evenementiel.jpg') }}"
+                                         alt="Service N°1 | Management de projet événementiel"/>
+                                    <figcaption>
+                                        <h3>Gestion <span>Evénementiel</span></h3>
+                                        <p>La Folle Agence organise vos événements d'entreprise.</p>
+                                        <a href="{{ path('lafolleagence_prestations') }}#gestion-event"></a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <figure class="effect-sadie">
+                                    <img src="{{ asset('images/gestion-de-projet-digital-lafolleagence.jpg') }}"
+                                         alt="Service N°3 | Veille concurrentielle"/>
+                                    <figcaption>
+                                        <h3>Gestion <span>Digitale</span></h3>
+                                        <p>La Folle Agence vous accompagne dans votre stratégie de communication
+                                            digitale.</p>
+                                        <a href="{{ path('lafolleagence_prestations') }}#gestion-projet"></a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <figure class="effect-sadie">
+                                    <img src="{{ asset('images/service-community-management.jpg') }}"
+                                         alt="Service N°2 | Community Management"/>
+                                    <figcaption>
+                                        <h3>Community <span>Management</span></h3>
+                                        <p>La Folle Agence gère votre présence sur les réseaux sociaux.</p>
+                                        <a href="{{ path('lafolleagence_prestations') }}#community-management"></a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <figure class="effect-sadie">
+                                    <img src="{{ asset('images/service-veille-concurrentielle.jpg') }}"
+                                         alt="Service N°3 | Veille concurrentielle"/>
+                                    <figcaption>
+                                        <h3>Veille <span>concurrentielle</span></h3>
+                                        <p>La Folle Agence vous conseille sur la stratégie a adopter face à vos
+                                            concurrents.</p>
+                                        <a href="{{ path('lafolleagence_prestations') }}#veille-concurrentielle"></a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid bandeau"></section>
+
+    <!-- Call-to-action pour le contact -->
+    <section class="container-fluid hook-contact">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <h2><strong>Discutons de <span>vos projets</span> autour d'un café ?</strong></h2>
+                <a href="{{ path('lafolleagence_contact') }}"><input type="button" class="pink-button"
+                                                                     value="Me contacter"></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Derniers articles publiés sur le blog -->
+    <section class="container-fluid white" id="last-articles">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <h2>Les derniers articles du Blog</h2>
+                <hr>
+
+                <!--CARROUSEL BLOG-->
+                <div class="row">
+                    <div class="col-md-12" data-wow-delay="0.2s">
+                        <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                            <!-- Carousel Slides / Quotes -->
+                            <div class="carousel-inner text-center">
+
+                                <!-- Quotes -->
+                                {% for post in carouselArticles %}
+                                    <div class="item carouselIndex">
+                                        <blockquote>
+                                            <div class="row">
+                                                <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                                                    <a href="{{ path('lafolleagence_article_blog',{ 'link': post.link }) }}">
+                                                        <p>{{ post.content|striptags|truncate(250)|raw }}</p>
+                                                        <small>{{ post.title }}</small>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </blockquote>
+                                    </div>
+                                {% endfor %}
+
+                                <!-- Carousel Buttons Next/Prev -->
+                                <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i
+                                            class="fa fa-chevron-left"></i></a>
+                                <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i
+                                            class="fa fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+{% endblock %}

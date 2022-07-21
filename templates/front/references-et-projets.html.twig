@@ -1,0 +1,266 @@
+{% extends 'base-arrow.html.twig' %}
+
+{% block title %}Mon site perso | Références et projets{% endblock %}
+{% block body %}
+    <header>
+        <section class="container-fluid scrolling" id="references-header">
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-md-offset-2 page-header-style">
+                    <h1><span>Engagée</span> dans vos projets</h1>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <!-- Bandeau de couleur -->
+    <section class="bandeau container-fluid"></section>
+
+    <!-- Mes Références-->
+    <section class="container-fluid white" id="references-pro">
+        <div class="row">
+            <div class="col-xs-10 col-xs-offset-1">
+                <h2>Mes Références</h2>
+                <hr>
+
+                <h3>Evènements</h3>
+                <ul>
+                    <li><a href="http://www.up.co/communities/france/lyon/startup-weekend/6857" target="_blank"
+                        >Startup Weekend Maker</a> - évènement organisé chez <a
+                                href="http://www.youfactory.co/" target="_blank">Youfactory</a> du 20 au
+                        22 novembre 2015
+                        -
+                        Community
+                    </li>
+                    <li>Startup Weekend Digital Open Labs – évènement organisé à l’INSA Lyon du 21 au 23
+                        février
+                        2014 – membre de l’équipe communication et partenaire de Novius pour le concours
+                        Vine (prix
+                        : un mois d’accompagnement par <a href="http://www.novius.com/" target="_blank">Novius</a>
+                        et La Folle Agence pour l’équipe gagnante)
+                    </li>
+                    <li>
+                        <a href="http://www.museomix.org/la-communaute-museomix-ile-de-france-fait-son-mixday-a-la-cite-des-sciences/"
+                           target="_blank"
+                        >Museomix</a> 2015 (Ile de France) – Mixday à la Cité des
+                        Sciences et de l’Industrie – Community Management
+                    </li>
+                    <li><a href="http://www.museomix.org/localisation/saint-etienne/" target="_blank">Museomix</a>
+                        2014 – Community Manager – Musée d’Art et d’Industrie de Saint-Etienne – 7
+                        au 10 novembre 2014
+                    </li>
+                    <li><a href="http://www.museomix.org/localisation/grenoble-2013/" target="_blank">Museomix</a>
+                        2013 – Community Manager – Musée dauphinois de Grenoble – 8 au 10 novembre
+                        2013, mise en place de la stratégie de communication sur les réseaux sociaux pour 2014
+                    </li>
+                    <li><a href="http://www.blendwebmix.com/" target="_blank">Blend Web Mix</a> –
+                        Responsable des Volontaires depuis 2013
+                    </li>
+                    <li><a href="http://www.atelier-objets-connectes.org/" target="_blank">Atelier
+                            Objets Connectés</a> – Community Management / Organisation depuis 2014
+                    </li>
+                    <li><a href="http://www.lacuisineduweb.com/" target="_blank">La Cuisine Du Web</a> – Participation à
+                        la v2 du site (ergonomie, analyse des besoins, zoning)
+                    </li>
+                </ul>
+                <h3>Intervention</h3>
+                <ul>
+                    <li><a href="http://ife.ens-lyon.fr/ife" target="_blank">Institut Français de
+                            l’éducation</a> –
+                        <a href="http://www.ens-lyon.fr/ecole-normale-superieure-de-lyon-accueil-77247.kjsp"
+                           target="_blank">Ecole Normale Supérieure de Lyon</a> –
+                        CommunityManager – Projet Météo
+                    </li>
+                    <ul>
+                        <li>Utilisation du logiciel GRAASP</li>
+                        <li>Création et animation du compte Twitter
+                            <a href="https://twitter.com/TremplinScience" target="_blank">Tremplindes Sciences</a>
+                        </li>
+                    </ul>
+                </ul>
+
+                <h3>Associations</h3>
+                <ul>
+                    <li>
+                        <a href="http://www.lacuisineduweb.com/" target="_blank">La Cuisine Du Web</a> –
+                        Adhérente et Birgadière
+                    </li>
+                    <li>Le <a href="http://www.communitymanagerslyon.com/" target="_blank">Club des Community Managers
+                            de Lyon</a> –
+                        Adhérente et membre du conseil d’administration
+                    </li>
+                </ul>
+
+                <h3>Autre</h3>
+                <ul>
+                    <li>OpenStreetMap pour « State Of The Map – France » (les 23 et 24 février 2013 à Lyon) – Rédaction
+                        du communiqué de presse (rédaction collaborative)
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forme triangle en SVG -->
+    <section class="container-fluid triangle-down">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 5" class="row" preserveAspectRatio="xMinYMin meet">
+            <title>Triangle pointe sections blanches</title>
+            <polygon points="50 3, 100 0, 0 0" fill="rgba(255,255,255,1)"/>
+        </svg>
+    </section>
+
+    <!--Mes projets -->
+    <section class="container-fluid grey " id="references">
+        <div class="row">
+            <div class="col-xs-12 col-md-offset-1 col-md-10">
+                <h2>Mes Projets</h2>
+                <hr>
+
+                <div class="panel panel-default panel-projects">
+                    <div class="panel-heading">
+                        <h3 class="panel-title color-pink">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Museomix</a>
+                        </h3>
+                    </div>
+
+                    <div id="collapse5" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="row" id="museomix">
+                                <div class="col-xs-12 col-sm-offset-1 col-sm-5">
+                                    <a href="http://www.museomix.org/" target="_blank">
+                                        <img src="{{ asset('images/museomix-2013-bilan-web-1.jpg') }}"
+                                             alt="Bilan du museomix 2013 en image">
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-10 col-xs-offset-1 col-sm-5 col-sm-offset-0">
+                                    <h4>Museomix, qu’est ce que c’est ?</h4>
+                                    <p>Museomix à pour but de réunir pendant 3 jours des passionnés de muséographie
+                                        venant de divers horizons. Pendant ces 3 jours, les participants co-créent et
+                                        testent de nouvelles façons d’approcher les expositions.</p>
+                                    <p>Depuis 2013, j’ai eu l’occasion de participer à 2 museomix et un mixday.
+                                        Durant l’édition 2013 (<a href="http://www.musee-dauphinois.fr/Musée"
+                                                                  target="_blank"> dauphinois de Grenoble</a>)
+                                        et l’édition 2014 (<a href="http://www.musee-art-industrie.saint-etienne.fr/"
+                                                              target="_blank">Musée d’Art et d’Industrie</a> de
+                                        Saint-Etienne)
+                                        j’ai fait partie de la webteam, avec pour mission la production et la diffusion
+                                        de contenus sur les
+                                        différents réseaux sociaux de l’évènement (<a
+                                                href="https://www.facebook.com/MuseomixRhoneAlpes/" target="_blank">Facebook</a>,
+                                        <a href="https://twitter.com/MuseomixRA" target="_blank">Twitter</a>,
+                                        <a href="https://www.youtube.com/user/MuseomixRA" target="_blank">Youtube</a>,
+                                        <a href="https://plus.google.com/u/0/b/115386338214913269603/115386338214913269603/about"
+                                           target="_blank">Google+</a>…)
+                                        ainsi que sur le site web.
+                                    </p>
+                                    <p>Depuis 2013, Museomix ne se déroule pas dans un musée mais dans plusieurs aussi
+                                        bien en
+                                        France qu’en Europe (Belgique) et à l’international (Canada, Mexique, Suisse) et
+                                        ce à
+                                        l’instar des éditions de 2011 et de 2012 qui se sont déroulées que dans un seul
+                                        musée. Ce qui
+                                        fait que l’évènement remonte régulièrement dans les Trending Topics sur Twitter.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default panel-projects">
+                    <div class="panel-heading">
+                        <h3 class="panel-title color-pink">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">Blend Web Mix</a>
+                        </h3>
+                    </div>
+
+                    <div id="collapse6" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="row" id="blendWebMix">
+                                <div class="col-xs-12 col-sm-offset-1 col-sm-5">
+                                    <a href="http://www.blendwebmix.com/" target="_blank">
+                                        <img src="{{ asset('images/Logo-blend-web-mix.png') }}"
+                                             alt="Blend Web Mix événement web à Lyon">
+                                    </a>
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <h4>Blend Web Mix, qu'est-ce que c'est ?</h4>
+                                    <p>C’est 2 jours pour apprendre et comprendre le web ainsi que des rencontres autour
+                                        du web. Blend Web Mix c’est deux pour remixer le web.</p>
+                                    <p>Depuis 2013, j’ai l’occasion de gérer les volontaires pendant la durée de
+                                        l’évènement.</p>
+                                    <p>Cela implique en amont :</p>
+                                    <ul>
+                                        <li>Prendre contact avec chaque école partenaire afin qu’elles relaient l’appel
+                                            à bénévoles
+                                        </li>
+                                        <li>Établir le planning des bénévoles sur les deux jours</li>
+                                        <li>S’assurer qu’ils auront tous leur badge pour l’évènement</li>
+                                        <li>S’assurer que chaque bénévole soit disponible le temps de l’évènement</li>
+                                    </ul>
+                                    <p>Depuis l’édition 2015, j’ai également des bénévoles qui sont des professionnels
+                                        du web
+                                        (intervenants, communicants, développeurs…).
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default panel-projects">
+                    <div class="panel-heading">
+                        <h3 class="panel-title color-pink">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">fHACKTORY
+                                Découverte</a>
+                        </h3>
+                    </div>
+
+                    <div id="collapse7" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="row" id="fhactory">
+                                <div class=" col-md-offset-1 col-sm-5">
+                                    <a href="http://www.atelier-objets-connectes.org/" target="_blank">
+                                        <img src="{{ asset('images/fHacktory-logo-la-folle-agence.jpg') }}"
+                                             alt="logo de Factory">
+                                    </a>
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <h4>fHACKtory, qu’est ce que c’est ?</h4>
+                                    <p>C’est un évènement ludique à Lyon permettant au geek qui se cache en chacun
+                                        d’entre
+                                        nous de découvrir et tester les technologies (software et hardware) liés aux
+                                        objets
+                                        connectés. On y découvre ou redécouvre différents composants mis à dispositions
+                                        pour créer ou
+                                        prototyper les objets du futur ! Arduino, Mindstorm, Imprimantes 3Ds, 3D pads,
+                                        sont au
+                                        rendez-vous.
+                                    </p>
+                                    <p>Depuis 2016 nous avons renommé l’Atelier Objets Connectés en fHACKtory
+                                        Découverte.
+                                        Pour retrouver toutes les informations nécessaires cela se passe sur divers
+                                        supports :
+                                    </p>
+                                    <ul>
+                                        <li>
+                                            <a href="https://www.facebook.com/fhacktory/" target="_blank">Facebook</a>
+                                        </li>
+                                        <li>
+                                            <a href="https://twitter.com/ObjetsC" target="_blank">Twitter</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.fhacktory.com/" target="_blank">Site</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> {# End col-xs-12 col-md-10 col-md-offset-1 #}
+        </div> {# End row #}
+    </section>
+{% endblock %}

@@ -1,0 +1,182 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La Folle Agence | A propos de nous{% endblock %}
+{% block body %}
+    <header>
+
+        <section class="container-fluid" id="a_propos">
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-md-offset-2 page-header-style">
+                    <h1>La Folle Agence,<span> c'est qui</span>?</h1>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <section class="container-fluid bandeau"></section>
+
+    <section class="container-fluid white" id="a_propospres">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-offset-1 col-md-10">
+                    <h2>Présentation de La Folle Agence</h2>
+                    <hr>
+                </div>
+                <div class="col-xs-12 col-md-offset-1 col-md-5" id="a_propos-text">
+                    <p>La Folle Agence c’est une <strong>Community Manager</strong> proposant de créer, gérer et animer
+                        vos comptes sur les réseaux sociaux mais aussi la modération des commentaires.</p>
+                    <p class="text-pres">La Folle Agence c’est une <strong>bloggueuse</strong> proposant de créer et
+                        gérer votre blog mais aussi vos sites, en assurant du contenu numérique de qualité (articles,
+                        photos, etc…).</p>
+                    <p class="text-pres">La Folle Agence propose également de la <strong>veille</strong> et des <strong>recommandations
+                            pour vos sites et vos blogs</strong>. Spécialisée dans la communication web, je propose des
+                        services liés à l’identité web de votre entreprise.</p>
+                </div>
+                <div class="col-xs-12 col-md-5">
+                    <img src="{{ asset('images/portrait_apropos.jpeg') }}">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forme triangle en SVG -->
+    <section class="container-fluid triangle-down">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 5" class="row" preserveAspectRatio="xMinYMin meet">
+            <title>Triangle pointe sections blanches</title>
+            <polygon points="50 3, 100 0, 0 0" fill="rgba(255,255,255,1)"/>
+        </svg>
+    </section>
+
+    <section class="container-fluid grey" id="parcourspro">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-offset-1 col-md-10">
+                    <h2>Mon parcours professionnel</h2>
+                    <hr>
+                </div>
+                <div class="col-xs-12 col-md-offset-1 col-md-10">
+                    <ul id="experiences">
+                        <li><span class="bold"> Depuis Avril 2013 : </span></br>La Folle Agence – community management,
+                            rédaction web, veille concurrentielle et informationnelle, optimisation de l’identité
+                            numérique, recommandations sites et blogs.
+                        </li>
+                        <ul>
+                            <li>Projets : <a href="http://www.museomix.org/">Museomix</a>, <a
+                                        href="http://www.lacuisineduweb.com/">La Cuisine du Web</a>, <a
+                                        href="http://www.blendwebmix.com/">Blend Web Mix</a>, <a
+                                        href="http://www.atelier-objets-connectes.org/">l’Atelier Objets Connectés</a>
+                            </li>
+                        </ul>
+                        </br>
+                        <li><span class="bold">Septembre 2014 – Août 2015 : </span></br>Community Manager sur le projet
+                            « Météo & Climat: Tremplin des Sciences » – Ecole Normale Supérieure de Lyon / Institut
+                            Français de l’éducation -Utilisation du logiciel <a href="http://graasp.eu/">GRAASP</a>
+                            (gestion de différents espaces de partage autour de la météo et du climat) / Création et
+                            animation du compte twitter Tremplin des Sciences (<a
+                                    href="https://twitter.com/TremplinScience">@tremplinscience)</a>.
+                        </li>
+                        </br>
+                        <li><span class="bold">Juin – Septembre 2012 : </span></br>Community Manager Playboy France –
+                            1633 SA – Marseille
+                        </li>
+                        <ul>
+                            <li>Gestion du site Playboy</li>
+                            <li>Gestion des comptes Twitter et Facebook</li>
+                        </ul>
+                        </br>
+                        <li><span class="bold">Octobre 2009 – Septembre 2012 : </span></br>Content Delivery Manager –
+                            1633 SA – Marseille
+                        </li>
+                        </br>
+                        <li><span class="bold">Février 2009 – Septembre 2009 : </span></br>Content Ingestion Manager
+                            Orange UK – Mobivillage (groupe Buongiorno) – Marseille
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bandeau container-fluid"></section>
+
+    <section class="container-fluid white" id="parcoursetu">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-offset-1 col-md-10">
+                    <h2>Parcours étudiant</h2>
+                    <hr>
+                </div>
+                <div class="col-xs-12 col-md-offset-1 col-md-10">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4">
+                            <h3>2008</h3>
+                            <p>Master en Nouveaux Médias de l’Information et de la Communication de l’Ecole de
+                                Journalisme et de Communication de Marseille – mention assez bien.</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <h3>2006</h3>
+                            <p>BA Business de l’université Staffordshire University (Stoke-on-Trent).</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <h3>2006</h3>
+                            <p>Maîtrise en Communication Globale de l’ISCPA – Institut des Média (Paris).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <input type="button" class="pink-button" value="Décrouvrez mon CV"
+                       onclick="window.open('http://www.justine-remaudiere.com/');">
+            </div>
+        </div>
+    </section>
+
+    <!-- Forme triangle en SVG -->
+    <section class="container-fluid triangle-down">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 5" class="row" preserveAspectRatio="xMinYMin meet">
+            <title>Triangle pointe sections blanches</title>
+            <polygon points="50 3, 100 0, 0 0" fill="rgba(255,255,255,1)"/>
+        </svg>
+    </section>
+
+    <section class="container-fluid grey" id="portraitchi">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-offset-1 col-md-10">
+                    <h2>Si j'étais...</h2>
+                    <hr>
+                </div>
+                <div class="col-xs-12 col-md-offset-1 col-md-10">
+                    <div class="col-xs-12 col-sm-3">
+                        <img src="{{ asset('images/pot-miel-lafolleagence-portrait-chinois.png') }}">
+                        <div class="col-xs-12 portraitchi-ans">
+                            <p><span>Un aliment</span></p>
+                            <p class="portraitchi-p">je serais le miel.</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <img src="{{ asset('images/lunettes-lafolleagence-portrait-chinois.png') }}">
+                        <div class="col-xs-12 portraitchi-ans">
+                            <p><span>Un accessoire</span></p>
+                            <p class="portraitchi-p">je serais des lunettes de soleil.</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <img src="{{ asset('images/chat-lafolleagence-portrait-chinois.png') }}">
+                        <div class="col-xs-12 portraitchi-ans">
+                            <p><span>Un animal</span></p>
+                            <p class="portraitchi-p">je serais un chat.</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <img src="{{ asset('images/verre-vin-lafolleagence-portrait-chinois.png') }}">
+                        <div class="col-xs-12 portraitchi-ans">
+                            <p><span>Un apéro</span></p>
+                            <p class="portraitchi-p">je serais un verre de vin blanc.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

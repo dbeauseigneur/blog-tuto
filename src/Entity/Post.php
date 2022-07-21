@@ -32,31 +32,37 @@ class Post
 	/**
 	 * @ORM\Column(type="datetime", nullable=true)
 	 */
-	private $PublicationDate;
+	private $publicationDate;
 
 	/**
 	 * @ORM\Column(type="text", nullable=true)
 	 */
-	private $Content;
+	private $content;
 
 	/**
 	 * @ORM\Column(type="boolean", nullable=true)
 	 */
-	private $OpenComment;
+	private $openComment;
 
 	/**
 	 * @ORM\Column(type="boolean", nullable=true)
 	 */
-	private $statut;
+	private $status;
 
 	/**
 	 * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="postId")
 	 */
 	private $comments;
 
+	/**
+	 * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="posts")
+	 */
+	private $categories;
+
 	public function __construct()
 	{
 		$this->comments = new ArrayCollection();
+		$this->categorys = new ArrayCollection();
 	}
 
 	public function getId(): ?int
@@ -90,48 +96,48 @@ class Post
 
 	public function getPublicationDate(): ?\DateTimeInterface
 	{
-		return $this->PublicationDate;
+		return $this->publicationDate;
 	}
 
-	public function setPublicationDate(?\DateTimeInterface $PublicationDate): self
+	public function setPublicationDate(?\DateTimeInterface $publicationDate): self
 	{
-		$this->PublicationDate = $PublicationDate;
+		$this->publicationDate = $publicationDate;
 
 		return $this;
 	}
 
 	public function getContent(): ?string
 	{
-		return $this->Content;
+		return $this->content;
 	}
 
-	public function setContent(?string $Content): self
+	public function setContent(?string $content): self
 	{
-		$this->Content = $Content;
+		$this->content = $content;
 
 		return $this;
 	}
 
 	public function isOpenComment(): ?bool
 	{
-		return $this->OpenComment;
+		return $this->openComment;
 	}
 
-	public function setOpenComment(?bool $OpenComment): self
+	public function setOpenComment(?bool $openComment): self
 	{
-		$this->OpenComment = $OpenComment;
+		$this->openComment = $openComment;
 
 		return $this;
 	}
 
-	public function isStatut(): ?bool
+	public function isStatus(): ?bool
 	{
-		return $this->statut;
+		return $this->status;
 	}
 
-	public function setStatut(?bool $statut): self
+	public function setStatus(?bool $status): self
 	{
-		$this->statut = $statut;
+		$this->status = $status;
 
 		return $this;
 	}
@@ -162,6 +168,30 @@ class Post
 				$comment->setPostId(null);
 			}
 		}
+
+		return $this;
+	}
+
+	/**
+	 * @return Collection<int, category>
+	 */
+	public function getCategories(): Collection
+	{
+		return $this->categories;
+	}
+
+	public function addCategory(category $category): self
+	{
+		if (!$this->categories->contains($category)) {
+			$this->categories[] = $category;
+		}
+
+		return $this;
+	}
+
+	public function removeCategory(category $category): self
+	{
+		$this->categories->removeElement($category);
 
 		return $this;
 	}

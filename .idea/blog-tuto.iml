@@ -145,9 +145,36 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/creof/wkb-parser" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/creof/wkt-parser" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/creof/geo-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-menu" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-menu-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jms/serializer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jms/metadata" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/admin-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/twig-extensions" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/doctrine-extensions" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/form-extensions" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/block-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/doctrine-orm-admin-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/friendsofsymfony/ckeditor-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-acl" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/string-extra" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/media-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/message-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/gaufrette" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nyholm/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/imagine/imagine" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/intl-extra" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfonycasts/verify-email-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jquery-3.6.0" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="font-awesome" level="application" />
   </component>
 </module>
