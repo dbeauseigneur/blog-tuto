@@ -1,0 +1,43 @@
+#quote-carousel {
+	padding: 0 10px 30px 10px;
+	margin-top: 10px;
+}
+
+#quote-carousel .carousel-control {
+	background: none;
+	font-size: 2.3em;
+	text-shadow: none;
+	margin-top: 30px;
+}
+
+#quote-carousel .carousel-control-prev {
+	left: -15px;
+}
+
+#quote-carousel .carousel-control-next {
+	right: -15px;
+}
+
+.carousel-inner {
+	min-height: 150px;
+}
+
+.carousel-inner a p {
+	font-weight: 300;
+}
+
+.carouselIndex a {
+	text-decoration: none;
+}
+
+.item blockquote {
+	border-left: none;
+	margin: 0;
+}
+
+.item blockquote p:before {
+	content: "\f10d";
+	font-family: 'Fontawesome';
+	float: left;
+	margin-right: 10px;
+}

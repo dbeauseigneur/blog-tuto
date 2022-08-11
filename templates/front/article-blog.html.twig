@@ -13,7 +13,7 @@
         <div class="container">
             <div class="row">
                 <!-- Blog Post Content Column -->
-                <div class="col-md-7 col-md-offset-1">
+                <div class="col-md-9">
                     <!-- Blog Post -->
 
                     <!-- Title -->
@@ -22,7 +22,7 @@
 
                     <!-- Date/Time -->
                     <p>
-                        <span class="glyphicon glyphicon-time"></span>{{ post.publicationDate|localizeddate('full','none') }}
+                        <span class="glyphicon glyphicon-time"></span>{{ post.publicationDate|format_datetime(locale='fr') }}
                     </p>
 
                     <!-- Post Content -->
@@ -35,33 +35,71 @@
                         <div class="well" id="commentForm">
                             <h4>Envie de réagir à cet article ? Déposez un commentaire :</h4>
                             {{ form_start(formComment,{'action': path('article_blog',{'link': post.link,'theme': theme})}) }}
-                            {{ form_widget(formComment) }}
-                            <div class="g-recaptcha" data-sitekey="6Leb8woUAAAAAOFvm89MdvU9VGM25cIOA-tj7ROG"
-                                 data-callback="enableBtn"></div>
-                            <input type="submit" name="submit" value="Envoyer un commentaire" class="purple-button"
-                                   id="btn_com"/>
+
+                            <div class="my-custom-class-for-errors">
+                                {{ form_errors(formComment) }}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-10 offset-xs-1 offset-md-1 col-md-5 inputGroupContainer">
+                                    {{ form_label(formComment.author,null,{'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(formComment.author,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+
+                                <div class="col-xs-10 offset-xs-1 offset-md-0 col-md-5 inputGroupContainer">
+                                    {{ form_label(formComment.authorEmail,null,{'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(formComment.authorEmail,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-10 offset-xs-1 offset-md-1 col-md-10 inputGroupContainer">
+                                    {{ form_label(formComment.content,null,{'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(formComment.content,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-10 offset-xs-1 offset-md-1 col-md-10 inputGroupContainer">
+                                    {{ form_label(formComment.captcha,null,{'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(formComment.captcha,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            {{ form_rest(formComment) }}
+
+                            <div class="row">
+                                <div class="col-xs-10 offset-xs-1 offset-md-1 col-md-10 inputGroupContainer">
+                                    <input type="submit" name="submit" value="Envoyer un commentaire"
+                                           class="purple-button"
+                                           id="btn_com"/>
+                                </div>
+                            </div>
                             {{ form_end(formComment) }}
                         </div>
 
                         <!-- Posted Comments -->
                         <!-- Comment -->
                         <section id="comment-zone">
+                            <h4>Ils ont commenté cette publication :</h4>
                             {% for comment in comments %}
                                 {% if comment.approved %}
-                                    <h4>Ils ont commenté cette publication :</h4>
+
                                     <div class="media">
+                                        <p class="media-heading">
+                                            <small>{{ comment.author }},
+                                                le {{ comment.date|format_datetime('full', 'short', locale='fr') }} a
+                                                écrit:</small>
+                                        </p>
                                         <div class="media-body">
-                                            <h5 class="media-heading">{{ comment.title }}
-                                                <small>{{ comment.author }},
-                                                    le {{ comment.date|date ('d/m/Y') }}</small>
-                                            </h5>
+
                                             <p>{{ comment.content }}</p>
+                                            <hr>
                                         </div>
                                     </div>
 
                                     {% if (comment.myAnswer != '') %}
                                         <div class="commentAnswer">
-                                            <h5 class="media-heading">Réponse de Damien :</h5>
+                                            <p class="media-heading">Réponse de Damien :</p>
                                             <p>{{ comment.myAnswer }}</p>
                                         </div>
                                     {% endif %}
@@ -72,7 +110,7 @@
                 </div>
 
                 <!-- Blog Sidebar Widgets Column -->
-                <div class="col-md-3 blog-cat">
+                <div class="col-md-3 blog-cat bg-secondary">
 
                     <!-- Blog Categories Well -->
                     <div class="well">
@@ -122,6 +160,5 @@
     </section>
 {% endblock %}
 {% block javascripts %}
-    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script type="text/javascript" src="{{ asset('js/article-blog.js') }}"></script>
 {% endblock %}

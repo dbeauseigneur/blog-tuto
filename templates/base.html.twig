@@ -18,27 +18,29 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+    {{ encore_entry_link_tags('app') }}
     {% if theme == "darkly" %}
-        <link href="{{ asset('/css/darkly.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('/css/darkly.css') }}" rel="stylesheet">
         {% set newParams = newParams|merge({'theme' : 'cerulean'}) %}
         {% set newThemeName = "cerulean" %}
     {% else %}
-        <link href="{{ asset('/css/cerulean.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('/css/cerulean.css') }}" rel="stylesheet">
         {% set newParams = newParams|merge({'theme' : 'darkly'}) %}
         {% set newThemeName = "darkly" %}
     {% endif %}
     <link href="{{ asset('/css/base.css') }}" rel="stylesheet">
-    {{ encore_entry_link_tags('app') }}
+
     {% block stylesheets %}
     {% endblock %}
-    {% block javascripts %}
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-                crossorigin="anonymous"></script>
 
-        {{ encore_entry_script_tags('app') }}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+
+    {{ encore_entry_script_tags('app') }}
+    {% block javascripts %}
     {% endblock %}
 </head>
 <body>
@@ -64,9 +66,8 @@
         <div class="collapse navbar-collapse" id="navbar-menubuilder">
             <ul class="nav navbar-nav">
                 <li><a class="nav-link" href="{{ path('a_propos', {theme: theme},true) }}">A propos</a></li>
-                <li><!--<a class="nav-link" href="{# { path('tutos', {theme: theme}) } #}">-->Tutos<!--</a>--></li>
+                <li><a class="nav-link" href="{{ path('tutos', {theme: theme}) }}">Tutos</a></li>
                 <li><a class="nav-link" href="{{ path('blog', {theme: theme}) }}">Blog</a></li>
-                <li><a class="nav-link" href="{{ path('qui-suis-je', {theme: theme},false) }}">Qui suis-je</a></li>
                 <li><a class="nav-link" href="{{ path('contact', {theme: theme},true ) }}">Contact</a></li>
             </ul>
 
@@ -132,15 +133,18 @@
                 </ul>
             </div>
         </div>
-        <div class="container-fluid col-12">
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav col-12" id="copyright">
-                    <li class="col-12"><p class="nav-item">Développé par Damien BEAUSEIGNEUR | Copyright Damien
-                            BEAUSEIGNEUR | 2022</p></li>
-                    <li class="col-12"><a class="nav-link" href="{{ path('mentionslegales') }}">Mentions légales</a>
-                    </li>
-                </ul>
+        <div class="container nav navbar-nav">
+            <!--<div class="collapse navbar-collapse"> -->
+            <!-- <div class="nav navbar-nav" id="copyright">-->
+            <div class="col-xs-12 col-sm-8"><p class="nav-item dev-by">Développé par Damien BEAUSEIGNEUR | Copyright
+                    Damien
+                    BEAUSEIGNEUR | 2022</p></div>
+            <div class="col-xs-12 col-sm-1 offset-sm-3"><a class="nav-link mentions"
+                                                           href="{{ path('mentions',{theme:theme}) }}">Mentions</a>
             </div>
+
+            <!--  </div> -->
+            <!--</div>-->
 
 
         </div>

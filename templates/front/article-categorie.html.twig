@@ -28,19 +28,19 @@
 
                     {% for post in posts %}
                         <h2>
-                            <a href="{{ path('lafolleagence_article_blog',{ 'link': post.link }) }}"
+                            <a href="{{ path('article_blog',{ 'link': post.link ,'theme':theme}) }}"
                                class="liencouleur">{{ post.title }}</a>
                         </h2>
 
                         <hr>
                         <p>
-                            <span class="glyphicon glyphicon-time"></span> {{ post.publicationDate|localizeddate('full','none') }}
+                            <span class="glyphicon glyphicon-time"></span> {{ post.publicationDate|format_datetime('full','none') }}
                         </p>
 
                         {{ post.content|striptags|truncate(800)|raw }}
                         <p></p>
                         <a class="btn btn-primary"
-                           href="{{ path('lafolleagence_article_blog', { 'link': post.link }) }}">Lire la suite <span
+                           href="{{ path('article_blog', { 'link': post.link ,'theme':theme}) }}">Lire la suite <span
                                     class="glyphicon glyphicon-chevron-right"></span></a>
                     {% endfor %}
 

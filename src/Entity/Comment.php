@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Comment
 {
@@ -45,7 +46,7 @@ class Comment
 	/**
 	 * @ORM\Column(type="boolean")
 	 */
-	private $approved;
+	private $approved = false;
 
 	/**
 	 * @ORM\Column(type="text", nullable=true)
@@ -157,5 +158,13 @@ class Comment
 		$this->postId = $postId;
 
 		return $this;
+	}
+
+	/**
+	 * @ORM\PrePersist
+	 **/
+	public function setDateValue(): void
+	{
+		$this->date = new \DateTime();
 	}
 }

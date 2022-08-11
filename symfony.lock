@@ -50,6 +50,9 @@
             "config/packages/fos_ckeditor.yaml"
         ]
     },
+    "gregwar/captcha-bundle": {
+        "version": "v2.2.0"
+    },
     "knplabs/knp-menu-bundle": {
         "version": "v3.2.0"
     },

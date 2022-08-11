@@ -11,5 +11,19 @@ a.darkly {
 }
 
 .body-gen {
-	margin-top: 46px;
+	margin-top: 81px;
+}
+
+h1 {
+	text-align: center;
+}
+
+p.dev-by {
+	margin: 0;
+	padding: 8px;
+	text-align: left;
+}
+
+a.mentions {
+	text-align: right;
 }

@@ -24,4 +24,5 @@ return [
 	FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
 	Sonata\MediaBundle\SonataMediaBundle::class => ['all' => true],
 	SymfonyCasts\Bundle\VerifyEmail\SymfonyCastsVerifyEmailBundle::class => ['all' => true],
+	Gregwar\CaptchaBundle\GregwarCaptchaBundle::class => ['all' => true],
 ];
