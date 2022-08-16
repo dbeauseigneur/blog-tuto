@@ -53,7 +53,7 @@ class PostController extends AbstractController
 		return $this->render('front/blog.html.twig', array(
 
 			'maxPage' => $maxPage,
-			'post' => $post,
+			'posts' => $post,
 			'page' => $page,
 			'archive' => $archive,
 			'categories' => $categories,

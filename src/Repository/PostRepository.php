@@ -67,7 +67,7 @@ class PostRepository extends ServiceEntityRepository
 			$offset = 0;
 		}
 		$query = $this->createQueryBuilder('p')
-			->innerJoin('p.categorys', 'c')
+			->innerJoin('p.categories', 'c')
 			->where('c.id = ?1')
 			->orderBy('p.publicationDate', 'DESC')
 			->setParameter(1, $category->getId())

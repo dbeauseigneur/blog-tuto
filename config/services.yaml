@@ -32,7 +32,11 @@ services:
         class: App\Admin\PostAdmin
         tags:
             - { name: sonata.admin, model_class: App\Entity\Post, manager_type: orm, label: Article }
-    admin.commet:
+    admin.comment:
         class: App\Admin\CommentAdmin
         tags:
             - { name: sonata.admin, model_class: App\Entity\Comment, manager_type: orm, label: Commentaire }
+    admin.typo:
+        class: App\Admin\TutoAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Tuto, manager_type: orm, label: Tuto }

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Tuto;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,6 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TutoRepository extends ServiceEntityRepository
 {
+	const MAX_RESULT = 4;
 	public function __construct(ManagerRegistry $registry)
 	{
 		parent::__construct($registry, Tuto::class);
@@ -37,6 +39,30 @@ class TutoRepository extends ServiceEntityRepository
 		if ($flush) {
 			$this->getEntityManager()->flush();
 		}
+	}
+
+	public function getByPage(int $page, int $itemPerPage = self::MAX_RESULT): Paginator
+	{
+		if ($page > 0) {
+			$offset = ($page - 1) * $itemPerPage;
+		} else {
+			$offset = 0;
+		}
+		$query = $this->createQueryBuilder('t')
+			->orderBy('t.date', 'DESC')
+			->where('t.published = 1')
+			->setFirstResult($offset)
+			->setMaxResults($itemPerPage);
+		return new Paginator($query);
+	}
+
+	public function getAllOrderByDate(): Paginator
+	{
+		$query = $this->createQueryBuilder('t')
+			->orderBy('t.date', 'DESC')
+			->where('t.published = 1');
+
+		return new Paginator($query);
 	}
 
 //    /**

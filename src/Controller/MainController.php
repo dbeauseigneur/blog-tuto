@@ -47,17 +47,6 @@ class MainController extends AbstractController
 	}
 
 	/**
-	 * @Route("/{theme<%themes%>}/tutos", name="tutos")
-	 */
-	public function tutos(string $theme): Response
-	{
-		if ($theme === '') {
-			$this->redirectToRoute('tutos', [$this->getParameter('default-theme')]);
-		}
-		return $this->render('base.html.twig', ['theme' => $theme]);
-	}
-
-	/**
 	 * @Route("/{theme<%themes%>}/contact", name="contact")
 	 * @throws TransportExceptionInterface
 	 */

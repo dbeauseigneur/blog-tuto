@@ -1,37 +1,38 @@
 {% extends 'base-arrow.html.twig' %}
 
-{% block title %}La DB Blog| Les derniers posts{% endblock %}
+{% block title %}La DB Blog| Les derniers tutos{% endblock %}
 {% block body %}
 
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8 offset-md-1">
                 <div class="page-header-style"><h1>Les actus du <span>DB Blog</span></h1></div>
-                {% if posts|length == 0 %}
+                {% if tutos|length == 0 %}
                     <h2>
-                        Aucun article pour l'instant
+                        Aucun tuto pour l'instant
                     </h2>
                 {% else %}
-                    {% for post in posts %}
+                    {% for tuto in tutos %}
                         <h2>
-                            <a href="{{ path('article_blog',{ 'link': post.link, 'theme':theme}) }}">{{ post.title }}</a>
+                            <a href="{{ path(tuto.url,{'theme':theme}) }}">{{ tuto.name }}</a>
                         </h2>
 
                         <hr>
                         <p>
-                            <span class="glyphicon glyphicon-time"></span> {{ post.publicationDate|format_datetime('short', 'none') }}
+                            <span class="glyphicon glyphicon-time"></span> {{ tuto.date|format_datetime('short', 'none') }}
                         </p>
 
-                        {{ post.content|striptags|u.truncate(800)|raw }}
+                        {{ tuto.describeContent|striptags|u.truncate(800)|raw }}
                         <p></p>
                         <a class="btn btn-primary"
-                           href="{{ path('article_blog', { 'link': post.link, 'theme':theme}) }}">Lire
+                           href="{{ path(tuto.url, {'theme':theme}) }}">Lire
                             la
                             suite <span
                                     class="glyphicon glyphicon-chevron-right"></span></a>
                     {% endfor %}
 
                     <!-- Pager -->
+
                     {% set minPager = ((page-2) >=1) ? page-2: 1 %}
                     {% set maxPager = ((page+2) <= maxPage) ? page+2: maxPage %}
                     <ul class="pagination">
@@ -73,37 +74,17 @@
             <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-2 blog-cat text-bg-secondary">
 
-                <!-- Blog Categories Well -->
-                <div class="well col-xs-12 col-sm-5 col-md-12">
-                    <h4>Catégories</h4>
-                    <div class="row">
-                        <ul class="list-unstyled">
-                            {% for category in categories %}
-                                <div class="col-lg-12">
-
-
-                                    <li>
-                                        <a href="{{ path('category_blog',{'slug': category.slug, 'theme':theme }) }}">{{ category.categoryName }}</a>
-                                    </li>
-
-                                </div>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <!-- /.row -->
-                </div>
-
 
                 <!-- Side Widget Well -->
                 <div class="well col-xs-12 col-sm-7 col-md-12" id="archives">
                     <h4>Archives</h4>
                     {# Init var year #}
                     {% set year = '9999' %}
-                    {# Loop for each post in archive #}
+                    {# Loop for each tuto in archive #}
                     <ul class="list-unstyled">
-                        {% for post in archive %}
-                        {# Test the current post year #}
-                        {% if post.publicationDate|date('Y') < year %}
+                        {% for tuto in archive %}
+                        {# Test the current tuto year #}
+                        {% if tuto.date|date('Y') < year %}
                         {# Test for close list not for the first time #}
                         {% if year != '9999' %}
                     </ul>
@@ -111,12 +92,12 @@
                         {# endif for close list not for the first time #}
                         {% endif %}
 
-                        <p>{{ post.publicationDate|date('Y') }}</p>
-                        {% set year = post.publicationDate|date('Y') %}
+                        <p>{{ tuto.date|date('Y') }}</p>
+                        {% set year = tuto.date|date('Y') %}
                         {# endif for year change #}
                         {% endif %}
                         <li>
-                            <a href="{{ path('article_blog',{ 'link': post.link ,'theme':theme}) }}">{{ post.title }}</a>
+                            <a href="{{ path(tuto.url,{'theme':theme}) }}">{{ tuto.name }}</a>
                         </li>
                         {% endfor %}
                     </ul>

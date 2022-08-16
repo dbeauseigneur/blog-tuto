@@ -28,12 +28,17 @@ class Tuto
 	private $url;
 
 	/**
+	 * @ORM\Column(type="text")
+	 */
+	private $describeContent;
+
+	/**
 	 * @ORM\Column(type="string", length=60, nullable=true)
 	 */
 	private $nameUrl;
 
 	/**
-	 * @ORM\Column(type="datetime")
+	 * @ORM\Column(type="datetime", nullable=true)
 	 */
 	private $date;
 
@@ -106,4 +111,23 @@ class Tuto
 
 		return $this;
 	}
+
+	/**
+	 * @return ?string
+	 */
+	public function getDescribeContent(): ?string
+	{
+		return $this->describeContent;
+	}
+
+	/**
+	 * @param ?string $describeContent
+	 * @return Tuto
+	 */
+	public function setDescribeContent(?string $describeContent): self
+	{
+		$this->describeContent = $describeContent;
+		return $this;
+	}
+
 }
