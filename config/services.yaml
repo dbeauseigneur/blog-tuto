@@ -4,7 +4,9 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-
+    themes: 'darkly|cerulean|'#'darkly|cerulean|'
+    default-theme: 'cerulean'
+    mail-perso: '%env(MAILER_TO)%'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -22,3 +24,19 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    admin.category:
+        class: App\Admin\CategoryAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Category, manager_type: orm, label: Catégorie }
+    admin.post:
+        class: App\Admin\PostAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Post, manager_type: orm, label: Article }
+    admin.comment:
+        class: App\Admin\CommentAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Comment, manager_type: orm, label: Commentaire }
+    admin.typo:
+        class: App\Admin\TutoAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Tuto, manager_type: orm, label: Tuto }

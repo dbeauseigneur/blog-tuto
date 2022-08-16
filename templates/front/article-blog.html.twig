@@ -1,0 +1,164 @@
+{% extends 'base-arrow.html.twig' %}
+
+{% block title %}Mon site perso | Blog {% endblock %}
+{% block body %}
+    <!-- Entête du site -->
+    <section class="container-fluid scrolling" id="blog-article-header"></section>
+
+    <!-- Bandeau de couleur -->
+    <section class="bandeau container-fluid"></section>
+
+    <!-- Page Content -->
+    <section id="article-content" class="white">
+        <div class="container">
+            <div class="row">
+                <!-- Blog Post Content Column -->
+                <div class="col-md-9">
+                    <!-- Blog Post -->
+
+                    <!-- Title -->
+                    <h1 class="blogtitre">{{ post.title }}</h1>
+                    <hr>
+
+                    <!-- Date/Time -->
+                    <p>
+                        <span class="glyphicon glyphicon-time"></span>{{ post.publicationDate|format_datetime(locale='fr') }}
+                    </p>
+
+                    <!-- Post Content -->
+                    <p class="lead">{{ post.content|raw }}</p>
+
+                    <hr>
+                    <!-- Blog Comments -->
+                    {% if post.openComment %}
+                        <!-- Comments Form -->
+                        <div class="well" id="commentForm">
+                            <h4>Envie de réagir à cet article ? Déposez un commentaire :</h4>
+                            {{ form_start(formComment,{'action': path('article_blog',{'link': post.link,'theme': theme})}) }}
+
+                            <div class="my-custom-class-for-errors">
+                                {{ form_errors(formComment) }}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-10 offset-xs-1 offset-md-1 col-md-5 inputGroupContainer">
+                                    {{ form_label(formComment.author,null,{'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(formComment.author,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+
+                                <div class="col-xs-10 offset-xs-1 offset-md-0 col-md-5 inputGroupContainer">
+                                    {{ form_label(formComment.authorEmail,null,{'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(formComment.authorEmail,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-10 offset-xs-1 offset-md-1 col-md-10 inputGroupContainer">
+                                    {{ form_label(formComment.content,null,{'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(formComment.content,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-10 offset-xs-1 offset-md-1 col-md-10 inputGroupContainer">
+                                    {{ form_label(formComment.captcha,null,{'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(formComment.captcha,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            {{ form_rest(formComment) }}
+
+                            <div class="row">
+                                <div class="col-xs-10 offset-xs-1 offset-md-1 col-md-10 inputGroupContainer">
+                                    <input type="submit" name="submit" value="Envoyer un commentaire"
+                                           class="purple-button"
+                                           id="btn_com"/>
+                                </div>
+                            </div>
+                            {{ form_end(formComment) }}
+                        </div>
+
+                        <!-- Posted Comments -->
+                        <!-- Comment -->
+                        <section id="comment-zone">
+                            <h4>Ils ont commenté cette publication :</h4>
+                            {% for comment in comments %}
+                                {% if comment.approved %}
+
+                                    <div class="media">
+                                        <p class="media-heading">
+                                            <small>{{ comment.author }},
+                                                le {{ comment.date|format_datetime('full', 'short', locale='fr') }} a
+                                                écrit:</small>
+                                        </p>
+                                        <div class="media-body">
+
+                                            <p>{{ comment.content }}</p>
+                                            <hr>
+                                        </div>
+                                    </div>
+
+                                    {% if (comment.myAnswer != '') %}
+                                        <div class="commentAnswer">
+                                            <p class="media-heading">Réponse de Damien :</p>
+                                            <p>{{ comment.myAnswer }}</p>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </section>
+                    {% endif %}
+                </div>
+
+                <!-- Blog Sidebar Widgets Column -->
+                <div class="col-md-3 blog-cat bg-secondary">
+
+                    <!-- Blog Categories Well -->
+                    <div class="well">
+                        <h4>Catégories</h4>
+                        <div class="row">
+                            {% for category in categories %}
+                                <div class="col-lg-12">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a href="{{ path('category_blog',{'slug': category.slug,'theme': theme }) }}">{{ category.categoryName }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <!-- /.row -->
+                    </div>
+
+                    <!-- Side Widget Well -->
+                    <div class="well">
+                        <h4>Archives</h4>
+                        {# Init var year #}
+                        {% set year = '9999' %}
+                        {# Loop for each post in archive #}
+                        {% for post in archive %}
+                        {# Test the current post year #}
+                        {% if post.publicationDate|date('Y') < year %}
+                        {# Test for close list not for the first time #}
+                        {% if year != '9999' %}
+                            </ul>
+                        {% endif %}
+                        <ul class="list-unstyled"> {{ post.publicationDate|date('Y') }}
+                            {# the current post year become the test year #}
+                            {% set year = post.publicationDate|date('Y') %}
+                            {% endif %}
+                            <li>
+                                <a href="{{ path('article_blog',{ 'link': post.link,'theme': theme}) }}">{{ post.title }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section>
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/article-blog.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,286 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('/css/a-propos.css') }}" rel="stylesheet">
+{% endblock stylesheets %}
+{% block title %}Le DB Blog | A propos de moi{% endblock %}
+{% block body %}
+    <header>
+
+        <section class="container-fluid" id="a_propos">
+            <div class="row">
+                <div class="offset-md-2 col-xs-12 col-md-8 page-header-style">
+                    <h1>Le DB Blog<span> c'est qui</span>?</h1>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <section class="container-fluid bandeau"></section>
+
+    <section class="container-fluid white" id="a_propospres">
+
+        <div class="row">
+
+            <div class="col-xs-12 offset-md-1 col-md-10">
+                <h2>Présentation du DB Blog</h2>
+                <hr>
+            </div>
+            <div class="col-xs-12 offset-md-1 col-md-10" id="a_propos-text">
+                <p>Le DB Blog c’est un <strong>Blog</strong> pour expliquer ce qu'est le métier de développeur à des
+                    personnes complètement extérieures au métier.</p>
+                <p class="text-pres">C'est aussi un ensemble de <strong>tutoriels</strong> montrant des méthodes
+                    liées à des problématiques techniques qui sont d'un niveau avancé</p>
+                <p class="text-pres">Pour résumé ce blog est un moyen pour moi de montrer ce que je sais faire.
+                    Même si une partie s'avère à des démonstrations techniques côté web, mon expérience ne se
+                    limitera pas à ça.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Forme triangle en SVG -->
+    <section class="container-fluid triangle-down">
+        <div class="separator bg-secondary"></div>
+    </section>
+
+    <section class="container-fluid grey" id="parcourspro">
+        <div class="row">
+
+            <div class="col-xs-12 offset-md-1 col-md-10">
+                <!--<ul id="experiences">-->
+                <h2>Mes diverses compétences</h2><br>
+                Je suis actuellement considéré comme un ingénieur généraliste expérimenté, mais cela ne veut pas
+                forcément dire que je connais tous les langages et toutes les méthodes de développements. Il y aurait
+                bien
+                trop de chose à retenir. Toutefois, voici la liste des connaissances accumulées au niveau technique.
+                <br>
+                <br>
+                <ul>
+                    <li><h3>Bases de données standards utilisées en contexte professionnel</h3>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr class="table-dark">
+                                <th scope="col">Nom de la base</th>
+                                <th scope="col">Sql</th>
+                                <th scope="col">Programmation</th>
+                            </tr>
+                            </thead>
+                            <tr class="table-primary">
+                                <th scope="row">Oracle</th>
+                                <td>X</td>
+                                <td>PL/SQL</td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">Sybase</th>
+                                <td>X</td>
+                                <td>T-SQL</td>
+                            </tr>
+                            <tr class="table-primary">
+                                <th scope="row">SQL-Server</th>
+                                <td>X</td>
+                                <td>T-SQL</td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">Postgres</th>
+                                <td>X</td>
+                                <td>PL/pgSQL</td>
+                            </tr>
+                            <tr class="table-primary">
+                                <th scope="row">MySQL</th>
+                                <td>X</td>
+                                <td>Non-utilisé en mode pro</td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">DB2</th>
+                                <td>X</td>
+                                <td>Non-utilisé en mode pro</td>
+                            </tr>
+                            <tr class="table-primary">
+                                <th scope="row">Access</th>
+                                <td>X</td>
+                                <td>programmation interface</td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">Filemaker</th>
+                                <td>X</td>
+                                <td>programmation d'interface</td>
+                            </tr>
+                        </table>
+                    </li>
+                    <br/>
+                    <li><h3>Outils utilisés</h3>
+                        <table class="table table-hover" class="table table-hover">
+                            <thead>
+                            <tr class="table-dark">
+                                <th scope="col">Type Outils</th>
+                                <th scope="col">Nom Outils</th>
+                            </tr>
+                            </thead>
+                            <tr class="table-primary">
+                                <th scope="row">SIG</th>
+                                <td>Mapinfo, QGIS, Smallworld</td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">Outils pour Base de données</th>
+                                <td>PowerAMC, SQL Developper, SQL Navigator, toad</td>
+                            </tr>
+                            <tr class="table-primary">
+                                <th scope="row">IDE</th>
+                                <td>Phpstorm, Netbeans, VisualStudio</td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">ETL</th>
+                                <td>SSIS, Talend, FME</td>
+                            </tr>
+                            <tr class="table-primary">
+                                <th scope="row">Autre</th>
+                                <td>Gimp, Wamp, Business Objects</td>
+                            </tr>
+                        </table>
+                    </li>
+                    </br>
+                    <li>
+                        <h3>Langages utilisés et framework associés</h3>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr class="table-dark">
+                                <th scope="col">Langage</th>
+                                <th scope="col">Framework</th>
+                                <th scope="col">Commentaire</th>
+                            </tr>
+                            </thead>
+                            <tr class="table-primary">
+                                <th scope="row">SQL</th>
+                                <td>aucun</td>
+                                <td>Même si le langage est commun à chaque base de données il existe des différences de
+                                    syntaxe pour obtenir certains résultats
+                                </td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">PHP</th>
+                                <td>Symfony</td>
+                                <td>Utilisé de la version 2.8 à la version 5.4</td>
+                            </tr>
+                            <tr class="table-primary">
+                                <th scope="row">Js</th>
+                                <td>Jquery, ExtJs</td>
+                                <td>En ce qui concerne extjs c'est un framework payant utilisé en mode maintenance
+                                    applicative
+                                </td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">Html css</th>
+                                <td>bootstrap</td>
+                                <td>Toutefois ce n'est pas vraiment un langage de développement</td>
+                            </tr>
+                            <tr class="table-primary">
+                                <th scope="row">PowerBuilder</th>
+                                <td>Pfc</td>
+                                <td>Langage de type client lourd</td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">VB6</th>
+                                <td></td>
+                                <td>Langage ancien maintenu de type client lourd</td>
+                            </tr>
+                            <tr class="table-primary">
+                                <th scope="row">TypeScript</th>
+                                <td>Angular</td>
+                                <td>Je l'ai utilisé en direct ou avec Angular, toutefois je ne suis pas expert mais
+                                    capable
+                                    de comprendre le fonctionnement, de plus ce dernier est très proche
+                                </td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">C#</th>
+                                <td></td>
+                                <td>Mes connaissances sont plus de type débogage et compréhension de base utilisé en
+                                    mode client lourd
+                                </td>
+                            </tr>
+                            <tr class="table-primary">
+                                <th scope="row">Java</th>
+                                <td></td>
+                                <td>Utilisé pour le débogage et le fonctionnement des éléments sur talent</td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">Delphi v6</th>
+                                <td></td>
+                                <td>Utilisé juste au début de ma carrière professionnelle</td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        <h3>Langages liés</h3>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr class="table-dark">
+                                <th scope="col">Langage</th>
+                                <th scope="col">Application liée</th>
+                                <th scope="col">Commentaire</th>
+                            </tr>
+                            </thead>
+                            <tr class="table-primary">
+                                <th scope="row">Mapbasic</th>
+                                <td>Mapinfo</td>
+                                <td>Le langage de scripting de mapinfo</td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">VBA</th>
+                                <td>Word, Excel</td>
+                                <td>Le langage des macros très proche de la programmation VB</td>
+                            </tr>
+                        </table>
+                    </li>
+                    <br/>
+                    <li>
+                        <h3>Api</h3>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr class="table-dark">
+                                <th scope="col">Type d'API</th>
+                                <th scope="col">Nom des apis</th>
+                                <th scope="col">Commentaires</th>
+                            </tr>
+                            </thead>
+                            <tr class="table-primary">
+                                <th scope="row">API JS</th>
+                                <td>OpenLayer</td>
+                                <td>API web de visualisation de données cartographique</td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">API JS</th>
+                                <td>FineUploader</td>
+                                <td>API web pour l'upload de fichiers</td>
+                            </tr>
+                            <tr class="table-primary">
+                                <th scope="row">API JS</th>
+                                <td>Potree</td>
+                                <td>API web pour l'affichage de nuage de points 3D</td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">API JS</th>
+                                <td>CesiumJS</td>
+                                <td>API web pour l'affichage de données 3D localisée sur terre</td>
+                            </tr>
+                            <tr class="table-primary">
+                                <th scope="row">ActiveX API 32 bit(pour client lourd)</th>
+                                <td>Mapx</td>
+                                <td>API pour l'affichage de cartographique sans lien avec internet pour les fonds de
+                                    carte
+                                </td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th scope="row">ActiveX API 32 bit(pour client lourd)</th>
+                                <td>Chronox</td>
+                                <td>API pour l'ajout d'un moteur de calcul d'itinéraire</td>
+                            </tr>
+
+                        </table>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+{% endblock %}

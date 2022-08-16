@@ -1,0 +1,29 @@
+#copyright {
+	text-align: center;
+}
+
+a.cerulean {
+	background-color: rgb(47, 64, 231);
+}
+
+a.darkly {
+	background-color: rgb(55, 90, 127);
+}
+
+.body-gen {
+	margin-top: 81px;
+}
+
+h1 {
+	text-align: center;
+}
+
+p.dev-by {
+	margin: 0;
+	padding: 8px;
+	text-align: left;
+}
+
+a.mentions {
+	text-align: right;
+}

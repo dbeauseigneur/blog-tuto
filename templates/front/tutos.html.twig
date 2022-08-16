@@ -1,0 +1,110 @@
+{% extends 'base-arrow.html.twig' %}
+
+{% block title %}La DB Blog| Les derniers tutos{% endblock %}
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-1">
+                <div class="page-header-style"><h1>Les actus du <span>DB Blog</span></h1></div>
+                {% if tutos|length == 0 %}
+                    <h2>
+                        Aucun tuto pour l'instant
+                    </h2>
+                {% else %}
+                    {% for tuto in tutos %}
+                        <h2>
+                            <a href="{{ path(tuto.url,{'theme':theme}) }}">{{ tuto.name }}</a>
+                        </h2>
+
+                        <hr>
+                        <p>
+                            <span class="glyphicon glyphicon-time"></span> {{ tuto.date|format_datetime('short', 'none') }}
+                        </p>
+
+                        {{ tuto.describeContent|striptags|u.truncate(800)|raw }}
+                        <p></p>
+                        <a class="btn btn-primary"
+                           href="{{ path(tuto.url, {'theme':theme}) }}">Lire
+                            la
+                            suite <span
+                                    class="glyphicon glyphicon-chevron-right"></span></a>
+                    {% endfor %}
+
+                    <!-- Pager -->
+
+                    {% set minPager = ((page-2) >=1) ? page-2: 1 %}
+                    {% set maxPager = ((page+2) <= maxPage) ? page+2: maxPage %}
+                    <ul class="pagination">
+                        <li class="page-item {% if page == 1 %} disabled {% endif %}">
+                            {% if page == 1 %}
+                                <a class="page-link" href="#">
+                                    Plus récent
+                                </a>
+                            {% else %}
+                                <a class="page-link" href="{{ path('blog', {'page': page - 1, 'theme': theme}) }}">
+                                    Plus récent
+                                </a>
+                            {% endif %}
+                        </li>
+                        {% for i in minPager..maxPager %}
+                            <li class="page-item {% if page == i %} active {% endif %}">
+                                <a class="page-link" {% if page == i %}href="#"{% else %}
+                                   href="{{ path('blog', {'page': i, 'theme': theme}) }} {% endif %}">
+                                    {{ i }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        <li class="page-item {% if page >= maxPage %} disabled {% endif %}">
+                            {% if page >= maxPage %}
+                                <a class="page-link" href="#">
+                                    Plus ancien
+                                </a>
+                            {% else %}
+                                <a class="page-link" href="{{ path('blog', {'page': page + 1, 'theme': theme}) }}">
+                                    Plus ancien
+                                </a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                {% endif %}
+
+            </div>
+
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-2 blog-cat text-bg-secondary">
+
+
+                <!-- Side Widget Well -->
+                <div class="well col-xs-12 col-sm-7 col-md-12" id="archives">
+                    <h4>Archives</h4>
+                    {# Init var year #}
+                    {% set year = '9999' %}
+                    {# Loop for each tuto in archive #}
+                    <ul class="list-unstyled">
+                        {% for tuto in archive %}
+                        {# Test the current tuto year #}
+                        {% if tuto.date|date('Y') < year %}
+                        {# Test for close list not for the first time #}
+                        {% if year != '9999' %}
+                    </ul>
+                    <ul class="list-unstyled">
+                        {# endif for close list not for the first time #}
+                        {% endif %}
+
+                        <p>{{ tuto.date|date('Y') }}</p>
+                        {% set year = tuto.date|date('Y') %}
+                        {# endif for year change #}
+                        {% endif %}
+                        <li>
+                            <a href="{{ path(tuto.url,{'theme':theme}) }}">{{ tuto.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+{% endblock %}
