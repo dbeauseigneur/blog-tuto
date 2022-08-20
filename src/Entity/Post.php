@@ -62,7 +62,7 @@ class Post
 	public function __construct()
 	{
 		$this->comments = new ArrayCollection();
-		$this->categorys = new ArrayCollection();
+		$this->categories = new ArrayCollection();
 	}
 
 	public function getId(): ?int
