@@ -2,12 +2,14 @@
 
 namespace App\Admin;
 
+use App\Entity\Category;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Form\Type\BooleanType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -19,6 +21,14 @@ class PostAdmin extends AbstractAdmin
 	protected function configureFormFields(FormMapper $form): void
 	{
 		$form->add('title', TextType::class, ['label' => 'titre'])
+			->add('categories', EntityType::class,
+				[
+					'label' => 'catégories',
+					'class' => Category::class,
+					'choice_label' => 'categoryName',
+					'multiple' => true,
+					'expanded' => false,
+				])
 			->add('content', CKEditorType::class,
 				[
 					'label' => 'contenu',
