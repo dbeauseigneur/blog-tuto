@@ -3,8 +3,6 @@
 {% block title %}La DB Blog| Les derniers tutos{% endblock %}
 {% block body %}
 
-    <div class="container-fluid">
-        <div class="row">
             <div class="col-md-8 offset-md-1">
                 <div class="page-header-style"><h1>Les actus du <span>DB Blog</span></h1></div>
                 {% if tutos|length == 0 %}
@@ -22,51 +20,49 @@
                             <span class="glyphicon glyphicon-time"></span> {{ tuto.date|format_datetime('short', 'none') }}
                         </p>
 
-                        {{ tuto.describeContent|striptags|u.truncate(800)|raw }}
+                        {{ tuto.describeContent|striptags|raw }}
                         <p></p>
-                        <a class="btn btn-primary"
-                           href="{{ path(tuto.url, {'theme':theme}) }}">Lire
-                            la
-                            suite <span
-                                    class="glyphicon glyphicon-chevron-right"></span></a>
+
                     {% endfor %}
 
                     <!-- Pager -->
 
                     {% set minPager = ((page-2) >=1) ? page-2: 1 %}
                     {% set maxPager = ((page+2) <= maxPage) ? page+2: maxPage %}
-                    <ul class="pagination">
-                        <li class="page-item {% if page == 1 %} disabled {% endif %}">
-                            {% if page == 1 %}
-                                <a class="page-link" href="#">
-                                    Plus récent
-                                </a>
-                            {% else %}
-                                <a class="page-link" href="{{ path('blog', {'page': page - 1, 'theme': theme}) }}">
-                                    Plus récent
-                                </a>
-                            {% endif %}
-                        </li>
-                        {% for i in minPager..maxPager %}
-                            <li class="page-item {% if page == i %} active {% endif %}">
-                                <a class="page-link" {% if page == i %}href="#"{% else %}
-                                   href="{{ path('blog', {'page': i, 'theme': theme}) }} {% endif %}">
-                                    {{ i }}
-                                </a>
+                    <div class="pagination">
+                        <ul class="pagination">
+                            <li class="page-item {% if page == 1 %} disabled {% endif %}">
+                                {% if page == 1 %}
+                                    <a class="page-link" href="#">
+                                        Plus récent
+                                    </a>
+                                {% else %}
+                                    <a class="page-link" href="{{ path('blog', {'page': page - 1, 'theme': theme}) }}">
+                                        Plus récent
+                                    </a>
+                                {% endif %}
                             </li>
-                        {% endfor %}
-                        <li class="page-item {% if page >= maxPage %} disabled {% endif %}">
-                            {% if page >= maxPage %}
-                                <a class="page-link" href="#">
-                                    Plus ancien
-                                </a>
-                            {% else %}
-                                <a class="page-link" href="{{ path('blog', {'page': page + 1, 'theme': theme}) }}">
-                                    Plus ancien
-                                </a>
-                            {% endif %}
-                        </li>
-                    </ul>
+                            {% for i in minPager..maxPager %}
+                                <li class="page-item {% if page == i %} active {% endif %}">
+                                    <a class="page-link" {% if page == i %}href="#"{% else %}
+                                       href="{{ path('blog', {'page': i, 'theme': theme}) }} {% endif %}">
+                                        {{ i }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                            <li class="page-item {% if page >= maxPage %} disabled {% endif %}">
+                                {% if page >= maxPage %}
+                                    <a class="page-link" href="#">
+                                        Plus ancien
+                                    </a>
+                                {% else %}
+                                    <a class="page-link" href="{{ path('blog', {'page': page + 1, 'theme': theme}) }}">
+                                        Plus ancien
+                                    </a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
                 {% endif %}
 
             </div>
@@ -104,7 +100,5 @@
 
                 </div>
             </div>
-        </div>
-    </div>
     <!-- /.row -->
 {% endblock %}

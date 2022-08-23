@@ -1,0 +1,32 @@
+img.tuto {
+	max-width: inherit;
+	margin: 0 auto;
+}
+
+div.tuto {
+	width: 100%;
+	max-width: 100%;
+	display: grid;
+}
+
+pre.bg-dark {
+	max-width: 100%;
+}
+
+pre.bg-dark code {
+	color: white;
+	text-wrap: normal;
+}
+
+code span.hljs-prompt {
+	opacity: 0.5;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+code span.personalized {
+	opacity: 0.5;
+	text-decoration-style: wavy;
+}

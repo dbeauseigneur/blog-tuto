@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('/css/install-tuto.css') }}" rel="stylesheet">
+{% endblock stylesheets %}
+{% block title %}Le DB Blog | Installer un site symfony sur vps ubuntu 22.4{% endblock %}
+{% block body %}
+    <div class="col-md-10 offset-md-1">
+        <h1>Comment installer un site réalisé php/symfony 5 et comme base de données
+            MySql chez OVH avec ubuntu 22.04 VPS chez ovh</h1>
+        <br/>
+        <h2>Première partie installation d'un VPS chez ovh sous Ubuntu 22.04</h2>
+
+        <h3>Après la connexion mise à jour se connecter sur le vps pour une mise à jour complète</h3>
+
+        <pre class="bg-dark">
+<code><span class="hljs-prompt">$ </span>sudo apt update
+<span class="hljs-prompt">$ </span>sudo apt upgrade</code>
+</pre>
+        <h3>Relancement par l'interface de gestion</h3>
+        <div class="tuto">
+            <img alt="Vue VPS relancement" src="{{ asset('images/tuto-1/vps-vue.png') }} " class="tuto">
+        </div>
+        <p>Et garder l\'adresse ip v4 pour la connexion au domaine</p>
+
+        <h3>L'association du domaine par l'adresse ip V4</h3>
+        <p>Dans la gestion des domaines d\'ovh, la cible du domaine pour un site web est de type A</p>
+        <div class="tuto">
+            <img alt="Vue domaine config" src="{{ asset('images/tuto-1/vue-config-domain.png') }}" class="tuto">
+        </div>
+        <p>Pour la modification du lien du domaine recopier à l'emplacement prévu l\'adresse ip V4 du vps</p>
+        <div class="tuto">
+            <img alt="Vue domaine modif" src="{{ asset('images/tuto-1/vue-pour-modif.png') }}" class="tuto">
+        </div>
+        <p>La seconde fenêtre sert de vérification des valeurs</p>
+        <div class="tuto">
+            <img alt="Vue domaine modif2" src="{{ asset('images/tuto-1/vue-pour-modif2.png') }}" class="tuto">
+        </div>
+        <p>Ne pas oublier de modifier le sous-domaine de base www</p>
+        <div class="tuto">
+            <img alt="Vue sous-domaine modif" src="{{ asset('images/tuto-1/modif-sous-domaine-www.png') }}"
+                 class="tuto">
+        </div>
+        <h2>Sur le serveur</h2>
+        <h3>Installation de LAMP</h3>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo apt install apache2 php libapache2-mod-php mysql-server php-mysql</code>
+</pre>
+        <h3>Création d’un utilisateur sous mysql</h3>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo mysql</code>
+    <code><span class="hljs-prompt">mysql&gt; </span>create user <span class="personalized">&lt;username&gt;</span> identified by <span
+                class="personalized">&lt;yourpassword&gt;</span>&nbsp;;
+    <span class="hljs-prompt">mysql&gt; </span>grant all access to <span class="personalized">&lt;username&gt;</span>&nbsp;;
+    <span class="hljs-prompt">mysql&gt; </span>exit&nbsp;;</code>
+</pre>
+
+        <h3>Composer</h3>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo apt install composer</code>
+</pre>
+
+        <h3>Complément d'installation php</h3>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo apt install php-gd php-xml php-dom php-fpm php-curl php-intl php-json php-mbstring php-zip</code>
+</pre>
+
+        <h3>Installation gestion des droits d’accès aux fichiers</h3>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo apt acl</code>
+</pre>
+
+        <h3>Config apache</h3>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo a2enmod proxy_fcgi setenvif</code>
+</pre>
+
+        <h3>Pour les répertoires Symfony</h3>
+        <p>La mise en place doit obligatoirement se faire dans un sous-répertoire de /var/www/. Par défaut les .htaccess
+            sont désactivés</p>
+
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
+    <span class="hljs-prompt">$ </span>sudo setfacl -dR -m u:&quot;$HTTPDUSER&quot;:rwX -m u:$(whoami):rwX var
+    <span class="hljs-prompt">$ </span>sudo setfacl -R -m u:&quot;$HTTPDUSER&quot;:rwX -m u:$(whoami):rwX var</code>
+</pre>
+        <p>Créer le .env.local avec vos données de production.
+            Pour la connection de la base de données elle doit être conforme à la norme des liens html</p>
+
+        <h3>Installation des dépendances</h3>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo composer install</code>
+</pre>
+        <h3>Gestion des assets (calcul automatique des liens)</h3>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo apt npm
+    <span class="hljs-prompt">$ </span>sudo npm install
+    <span class="hljs-prompt">$ </span>sudo npm run build</code>
+</pre>
+        <h3>Création du site virtuel</h3>
+        <p>Contenu du fichier conf</p>
+        <pre class="bg-dark">
+<code>&lt;VirtualHost *&gt;
+    ServerName blog-db.fr
+    ServerAlias www.blog-db.fr
+    ServerAdmin ubuntu@localhost
+    DocumentRoot /var/www/<span class="personalized">&lt;your_subdirectory&gt;</span>/public
+    DirectoryIndex /index.php
+    ErrorLog /var/log/apache2/project_error.log
+    CustomLog /var/log/apache2/project_error.log combined
+    &lt;Directory /var/www/<span class="personalized">&lt;your_subdirectory&gt;</span>/public&gt;
+        AllowOverride None
+        Order Allow,Deny
+        Allow from All
+        FallbackResource /index.php
+    &lt;/Directory&gt;
+    &lt;Directory /var/www/<span class="personalized">&lt;your_subdirectory&gt;</span>/public/bundles&gt;
+        DirectoryIndex disabled
+        FallbackResource disabled
+    &lt;/Directory&gt;
+&lt;/ VirtualHost&gt;</code>
+</pre>
+        <h3>activation du site dans apache2</h3>
+        <p>pour information le nom du site c\'est le nom du fichier conf sans l'extension</p>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo a2ensite &lt;site&gt;
+    <span class="hljs-prompt">$ </span>sudo systemctl reload apache2</code>
+</pre>
+        <h3>pour désactiver le site dans apache</h3>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo a2dissite &lt;site&gt;
+    <span class="hljs-prompt">$ </span>sudo systemctl reload apache2</code>
+</pre>
+
+        <h3>Pour la base de données</h3>
+        <p>une fois vos données environnemental OK</p>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>php bin/console doctrine:database:create
+    <span class="hljs-prompt">$ </span>php bin/console doctrine:migrations:migrate</code>
+</pre>
+
+        <h3>création de l'admin</h3>
+
+        <p>Le code ci-dessous pour crypter le mot de passe de l'administrateur, et récupérer son hash</p>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>symfony console security:hash-password</code>
+</pre>
+
+        <h3>creation de l'admin</h3>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>mysql -u &lt;<span class="personalized">your user</span>&gt; -p
+    <span class="hljs-prompt">entrer votre mot de passe</span>
+    <span class="hljs-prompt">mysql&gt; </span>connect &lt;your database&gt;
+    <span class="hljs-prompt">mysql&gt; </span>INSERT INTO user (username, roles, password, is_verified)
+        <span class="hljs-prompt">-&gt;</span> VALUES ('<span class="personalized">your admin name'</span>, '[\&quot;ROLE_ADMIN\&quot;]',
+        <span class="hljs-prompt">-&gt;</span> '<span class="personalized">your hashed password</span>',1);
+    <span class="hljs-prompt">mysql&gt; </span>Commit;
+    <span class="hljs-prompt">mysql&gt; </span>exit</code>
+</pre>
+        <h3>Mise en place du mode https avec lestencrypt</h3>
+        <h4>Installation de snap</h4>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo snap install core; sudo snap refresh core</code>
+</pre>
+        <p>N'existe pas de base sur ubuntu 22.04, mais par sécurité</p>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo apt-get remove certbot</code>
+</pre>
+        <h4>Installation certbot</h4>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo snap install --classic certbot</code>
+</pre>
+        <h4>Création d'un lien pour exécution</h4>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo ln -s /snap/bin/certbot /usr/bin/certbot</code>
+</pre>
+        <h4>activation de certbot</h4>
+        <pre class="bg-dark">
+    <code><span class="hljs-prompt">$ </span>sudo certbot --apache</code>
+</pre>
+    </div>
+{% endblock %}
