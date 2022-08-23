@@ -27,3 +27,12 @@ p.dev-by {
 a.mentions {
 	text-align: right;
 }
+
+div.pagination {
+	padding: 8px;
+	flex-direction: row-reverse;
+}
+
+footer {
+	width: 100%;
+}

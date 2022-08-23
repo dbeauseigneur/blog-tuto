@@ -63,7 +63,7 @@
         </button>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbar-menubuilder">
+        <div id="navbarResponsive" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a class="nav-link" href="{{ path('a_propos', {theme: theme},true) }}">A propos</a></li>
                 <li><a class="nav-link" href="{{ path('tutos', {theme: theme}) }}">Tutos</a></li>
@@ -153,6 +153,6 @@
 </footer>
 <!-- Our script -->
 <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
-
+<script type="text/javascript" src="{{ asset('js/base.js') }}"></script>
 </body>
 </html>

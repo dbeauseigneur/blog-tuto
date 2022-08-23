@@ -55,11 +55,22 @@ class TutoController extends AbstractController
 	}
 
 	/**
-	 * @return void
+	 * @param string $theme
+	 * @return Response
 	 * @route("/test",name = "test")
 	 */
 	public function testTuto(string $theme): Response
 	{
 		return $this->render('front/testTuto.html.twig');
+	}
+
+	/**
+	 * @param string $theme
+	 * @return Response
+	 * @route("/install",name = "install")
+	 */
+	public function installTuto(string $theme): Response
+	{
+		return $this->render('front/installTuto.html.twig', ['theme' => $theme]);
 	}
 }
