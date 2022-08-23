@@ -55,7 +55,7 @@ class TutoAdmin extends AbstractAdmin
 
 	protected function configureShowFields(ShowMapper $show): void
 	{
-		$show->add('title')
+		$show->add('name')
 			->add('url')
 			->add('describeContent', CKEditorType::class,
 				[
