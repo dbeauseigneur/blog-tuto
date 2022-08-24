@@ -1,6 +1,7 @@
 {% extends 'base-arrow.html.twig' %}
 
-{% block title %}Le DB Blog | Mentions légales{% endblock %}
+{% block title %}Le Blog de DB | {{ tuto.name }}{% endblock %}
+{% block description %}{{ tuto.describeContent }}{% endblock %}
 {% block body %}
     <section class="container-fluid">
         <div class="container">

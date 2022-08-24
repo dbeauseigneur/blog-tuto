@@ -1,26 +1,28 @@
 {% extends 'base-arrow.html.twig' %}
 
-{% block title %}La DB Blog| Les derniers posts{% endblock %}
+{% block title %}Le Blog de DB| Les derniers posts{% endblock %}
+{% block description %}Les derniers posts du Blog de DB{% endblock %}
+{% block robot %}noindex, nofollow{% endblock %}
 {% block body %}
 
-            <div class="col-md-8 offset-md-1">
-                <div class="page-header-style"><h1>Les actus du <span>DB Blog</span></h1></div>
-                {% if posts|length == 0 %}
-                    <h2>
-                        Aucun article pour l'instant
-                    </h2>
-                {% else %}
-                    {% for post in posts %}
-                        <h2>
-                            <a href="{{ path('article_blog',{ 'link': post.link, 'theme':theme}) }}">{{ post.title }}</a>
-                        </h2>
+    <div class="col-md-8 offset-md-1">
+        <div class="page-header-style"><h1>Les actus du <span>DB Blog</span></h1></div>
+        {% if posts|length == 0 %}
+            <h2>
+                Aucun article pour l'instant
+            </h2>
+        {% else %}
+            {% for post in posts %}
+                <h2>
+                    <a href="{{ path('article_blog',{ 'link': post.link, 'theme':theme}) }}">{{ post.title }}</a>
+                </h2>
 
-                        <hr>
-                        <p>
-                            <span class="glyphicon glyphicon-time"></span> {{ post.publicationDate|format_datetime('short', 'none') }}
-                        </p>
+                <hr>
+                <p>
+                    <span class="glyphicon glyphicon-time"></span> {{ post.publicationDate|format_datetime('short', 'none') }}
+                </p>
 
-                        {{ post.content|striptags|u.truncate(800)|raw }}
+                {{ post.content|striptags|u.truncate(800)|raw }}
                         <p></p>
                         <a class="btn btn-primary"
                            href="{{ path('article_blog', { 'link': post.link, 'theme':theme}) }}">Lire
@@ -68,37 +70,34 @@
                     </div>
                 {% endif %}
 
-            </div>
+    </div>
 
-            <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-2 blog-cat text-bg-secondary">
+    <!-- Blog Sidebar Widgets Column -->
+    <div class="col-md-2 blog-cat text-bg-secondary">
 
-                <!-- Blog Categories Well -->
-                <div class="well col-xs-12 col-sm-5 col-md-12">
-                    <h4>Catégories</h4>
-                    <div class="row">
-                        <ul class="list-unstyled">
-                            {% for category in categories %}
-                                <div class="col-lg-12">
-
-
-                                    <li>
-                                        <a href="{{ path('category_blog',{'slug': category.slug, 'theme':theme }) }}">{{ category.categoryName }}</a>
-                                    </li>
-
-                                </div>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <!-- /.row -->
+        <!-- Blog Categories Well -->
+        <div class="well col-xs-12 col-sm-5 col-md-12">
+            <h4>Catégories</h4>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-unstyled">
+                        {% for category in categories %}
+                            <li>
+                                <a href="{{ path('category_blog',{'slug': category.slug, 'theme':theme }) }}">{{ category.categoryName }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
+            </div>
+            <!-- /.row -->
+        </div>
 
 
-                <!-- Side Widget Well -->
-                <div class="well col-xs-12 col-sm-7 col-md-12" id="archives">
-                    <h4>Archives</h4>
-                    {# Init var year #}
-                    {% set year = '9999' %}
+        <!-- Side Widget Well -->
+        <div class="well col-xs-12 col-sm-7 col-md-12" id="archives">
+            <h4>Archives</h4>
+            {# Init var year #}
+            {% set year = '9999' %}
                     {# Loop for each post in archive #}
                     <ul class="list-unstyled">
                         {% for post in archive %}

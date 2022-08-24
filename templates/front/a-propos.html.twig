@@ -2,14 +2,15 @@
 {% block stylesheets %}
     <link href="{{ asset('/css/a-propos.css') }}" rel="stylesheet">
 {% endblock stylesheets %}
-{% block title %}Le DB Blog | A propos de moi{% endblock %}
+{% block title %}Le Blog de DB | A propos de moi{% endblock %}
+{% block description %}Qui est le créateur du Blog de DB? Damien Beauseigneur, mes connaissances accumulées etc...{% endblock %}
 {% block body %}
     <header>
 
         <section class="container-fluid" id="a_propos">
             <div class="row">
                 <div class="offset-md-2 col-xs-12 col-md-8 page-header-style">
-                    <h1>Le DB Blog<span> c'est qui</span>?</h1>
+                    <h1>Le Blog de DB<span> c'est qui</span>?</h1>
                 </div>
             </div>
         </section>
@@ -26,7 +27,7 @@
                 <hr>
             </div>
             <div class="col-xs-12 offset-md-1 col-md-10" id="a_propos-text">
-                <p>Le DB Blog c’est un <strong>Blog</strong> pour expliquer ce qu'est le métier de développeur à des
+                <p>Le Blog de DB c’est un <strong>Blog</strong> pour expliquer ce qu'est le métier de développeur à des
                     personnes complètement extérieures au métier.</p>
                 <p class="text-pres">C'est aussi un ensemble de <strong>tutoriels</strong> montrant des méthodes
                     liées à des problématiques techniques qui sont d'un niveau avancé</p>
@@ -108,9 +109,8 @@
                             </tr>
                         </table>
                     </li>
-                    <br/>
                     <li><h3>Outils utilisés</h3>
-                        <table class="table table-hover" class="table table-hover">
+                        <table class="table table-hover">
                             <thead>
                             <tr class="table-dark">
                                 <th scope="col">Type Outils</th>
@@ -139,7 +139,6 @@
                             </tr>
                         </table>
                     </li>
-                    </br>
                     <li>
                         <h3>Langages utilisés et framework associés</h3>
                         <table class="table table-hover">
@@ -233,7 +232,6 @@
                             </tr>
                         </table>
                     </li>
-                    <br/>
                     <li>
                         <h3>Api</h3>
                         <table class="table table-hover">

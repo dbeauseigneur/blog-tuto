@@ -2,7 +2,9 @@
 {% block stylesheets %}
     <link href="{{ asset('/css/install-tuto.css') }}" rel="stylesheet">
 {% endblock stylesheets %}
-{% block title %}Le DB Blog | Installer un site symfony sur vps ubuntu 22.4{% endblock %}
+
+{% block title %}Le Blog de DB | {{ tuto.name }}{% endblock %}
+{% block description %}{{ tuto.describeContent }}{% endblock %}
 {% block body %}
     <div class="col-md-10 offset-md-1">
         <h1>Comment installer un site réalisé php/symfony 5 et comme base de données

@@ -1,5 +1,6 @@
 {% extends 'base-arrow.html.twig' %}
-{% block title %}Le DB BLog | Blog du programmeur informatique{% endblock %}
+{% block title %}Le Blog de DB | Blog du programmeur informatique{% endblock %}
+{% block description %}La page d'accueil du Blog de DB {% endblock %}
 {% block stylesheets %}
     <link href="{{ asset('/css/index.css') }}" rel="stylesheet">{% endblock %}
 {% block body %}
@@ -34,7 +35,7 @@
                                         <blockquote>
                                             <div class="row">
                                                 <div class="col-sm-8 offset-sm-2 col-xs-10 offset-xs-1">
-                                                    <cite><p>{{ post.content|striptags|u.truncate(250)|raw }}</p></cite>
+                                                    <cite>{{ post.content|striptags|u.truncate(250)|raw }}</cite>
                                                     <a href="{{ path('article_blog',{ 'theme': theme,'link': post.link }) }}">
                                                         <small>{{ post.title }}</small>
                                                     </a>
