@@ -1,26 +1,28 @@
 {% extends 'base-arrow.html.twig' %}
 
-{% block title %}La DB Blog| Les derniers tutos{% endblock %}
+{% block title %}Le Blog de DB| Les derniers tutos{% endblock %}
+{% block description %}Les derniers tutos du Blog de DB{% endblock %}
+{% block robot %}noindex, nofollow{% endblock %}
 {% block body %}
 
-            <div class="col-md-8 offset-md-1">
-                <div class="page-header-style"><h1>Les actus du <span>DB Blog</span></h1></div>
-                {% if tutos|length == 0 %}
-                    <h2>
-                        Aucun tuto pour l'instant
-                    </h2>
-                {% else %}
-                    {% for tuto in tutos %}
-                        <h2>
-                            <a href="{{ path(tuto.url,{'theme':theme}) }}">{{ tuto.name }}</a>
-                        </h2>
+    <div class="col-md-8 offset-md-1">
+        <div class="page-header-style"><h1>Les actus du <span>DB Blog</span></h1></div>
+        {% if tutos|length == 0 %}
+            <h2>
+                Aucun tuto pour l'instant
+            </h2>
+        {% else %}
+            {% for tuto in tutos %}
+                <h2>
+                    <a href="{{ path(tuto.url,{'theme':theme}) }}">{{ tuto.name }}</a>
+                </h2>
 
-                        <hr>
-                        <p>
-                            <span class="glyphicon glyphicon-time"></span> {{ tuto.date|format_datetime('short', 'none') }}
-                        </p>
+                <hr>
+                <p>
+                    <span class="glyphicon glyphicon-time"></span> {{ tuto.date|format_datetime('short', 'none') }}
+                </p>
 
-                        {{ tuto.describeContent|striptags|raw }}
+                {{ tuto.describeContent|striptags|raw }}
                         <p></p>
 
                     {% endfor %}

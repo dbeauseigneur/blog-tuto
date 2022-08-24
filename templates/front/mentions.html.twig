@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Le DB Blog | Mentions légales{% endblock %}
+{% block title %}Le Blog de DB | Mentions légales{% endblock %}
+{% block description %}Les références sur les outils de conceptions utilisées pour les pages de base{% endblock %}
+{% block robot %}noindex, nofollow{% endblock %}
 {% block body %}
     <section class="container-fluid">
         <div class="container">
@@ -21,11 +23,11 @@
 
             <div class="row">
                 <div class="col-md-offset-1 col-md-10">
-                    <p>Le site a été écrit en PHP avec le framework Symfony en version 5.4 en mode mvc</p>
+                    <p>Le site a été écrit avec du PHP et le framework Symfony en version 5.4 en mode mvc</p>
                     <p>
-                        La gestion des styles utilisés dans ce site est une gestion normalement utilisé pour les
+                        La gestion des styles utilisés dans ce site est une gestion normalement utilisée pour les
                         langues.
-                        Ce qui permet une non utilisation des cookies pour le choix du formatage utilisateurs
+                        Ce qui permet une non-utilisation des cookies pour le choix du formatage utilisateurs
                     </p>
                     <p>
                         Les styles choisis proviennent de <a href="https://bootswatch.com">bootswatch</a>
@@ -38,62 +40,4 @@
         </div>
     </section>
 
-    <!-- Forme triangle en SVG -->
-    <!--
-    <section class="container-fluid triangle-down">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 5" class="row" preserveAspectRatio="xMinYMin meet">
-            <title>Triangle pointe sections blanches</title>
-            <polygon points="50 3, 100 0, 0 0" fill="rgba(255,255,255,1)"/>
-        </svg>
-    </section>
-
-    <section class="grey container-fluid" id="credits-images">
-        <div class="container">
-            <div class="row">
-                <h2>Crédits images</h2>
-                <hr>
-            </div>
-
-            <div class="row">
-                <div class="col-md-offset-1 col-md-10">
-                    <ul>
-                        <li><span class="bold">Illustrations :</span>
-                            <p>
-                                <a class="legal-img"
-                                   href="http://fr.freepik.com/vecteurs-libre/les-abeilles-autour-de-pot-de-miel-fond_898524.htm"
-                                   rel="nofollow">Pot de miel</a><br>
-                                <a class="legal-img"
-                                   href="http://fr.freepik.com/vecteurs-libre/paquet-de-lunettes-de-soleil-colorees-pour-l-39-ete_946344.htm"
-                                   rel="nofollow">Lunettes de soleil</a><br>
-                                <a class="legal-img"
-                                   href="http://fr.freepik.com/vecteurs-libre/hippie-chat-illustration-vectorielle_719173.htm"
-                                   rel="nofollow">Chat</a><br>
-                                <a class="legal-img"
-                                   href="http://fr.freepik.com/vecteurs-libre/vecteurs-de-vin-dessines-a-la-main-avec-une-texture-tableau-noir_737056.htm"
-                                   rel="nofollow">Verre à pied</a><br>
-                            </p>
-                        </li>
-                        <li><span class="bold">Photographies :</span>
-                            <p>
-                                <a class="legal-img" href="https://unsplash.com/@dustinlee" rel="nofollow">Dustin
-                                    Lee</a><br>
-                                <a class="legal-img" href="https://unsplash.com/@readysetfreddy" rel="nofollow">Freddy
-                                    Castro</a><br>
-                                <a class="legal-img" href="https://unsplash.com/@firmbee" rel="nofollow">William
-                                    Iven</a><br>
-                                <a class="legal-img" href="https://unsplash.com/@goian" rel="nofollow">Ian Schneider</a><br>
-                                <a class="legal-img" href="https://unsplash.com/@gabrielssantiago" rel="nofollow">Gabriel
-                                    Santiago</a><br>
-                                <a class="legal-img" href="https://unsplash.com/@flenjoore" rel="nofollow">Olu Eletu</a><br>
-                                <a class="legal-img" href="https://unsplash.com/@laurenmancke" rel="nofollow">Lauren
-                                    Mancke</a><br>
-
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    -->
 {% endblock %}

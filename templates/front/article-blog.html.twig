@@ -1,6 +1,7 @@
 {% extends 'base-arrow.html.twig' %}
 
-{% block title %}Mon site perso | Blog {% endblock %}
+{% block title %}Le Blog de DB |{{ post.title|striptags|u.truncate(100)|raw }} {% endblock %}
+{% block description %}{{ post.content|striptags|u.truncate(200)|raw }}{% endblock %}
 {% block body %}
     <!-- Entête du site -->
     <section class="container-fluid scrolling" id="blog-article-header"></section>
@@ -135,19 +136,23 @@
                         {# Init var year #}
                         {% set year = '9999' %}
                         {# Loop for each post in archive #}
-                        {% for post in archive %}
-                        {# Test the current post year #}
-                        {% if post.publicationDate|date('Y') < year %}
-                        {# Test for close list not for the first time #}
-                        {% if year != '9999' %}
-                            </ul>
-                        {% endif %}
-                        <ul class="list-unstyled"> {{ post.publicationDate|date('Y') }}
-                            {# the current post year become the test year #}
+                        <ul class="list-unstyled">
+                            {% for post in archive %}
+                            {# Test the current post year #}
+                            {% if post.publicationDate|date('Y') < year %}
+                            {# Test for close list not for the first time #}
+                            {% if year != '9999' %}
+                        </ul>
+                        <ul class="list-unstyled">
+                            {# endif for close list not for the first time #}
+                            {% endif %}
+
+                            <p>{{ post.publicationDate|date('Y') }}</p>
                             {% set year = post.publicationDate|date('Y') %}
+                            {# endif for year change #}
                             {% endif %}
                             <li>
-                                <a href="{{ path('article_blog',{ 'link': post.link,'theme': theme}) }}">{{ post.title }}</a>
+                                <a href="{{ path('article_blog',{ 'link': post.link ,'theme':theme}) }}">{{ post.title }}</a>
                             </li>
                             {% endfor %}
                         </ul>
