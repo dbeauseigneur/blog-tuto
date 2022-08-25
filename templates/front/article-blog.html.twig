@@ -2,6 +2,7 @@
 
 {% block title %}Le Blog de DB |{{ post.title|striptags|u.truncate(100)|raw }} {% endblock %}
 {% block description %}{{ post.content|striptags|u.truncate(200)|raw }}{% endblock %}
+{% block robot %}index, nofollow{% endblock %}
 {% block body %}
     <!-- Entête du site -->
     <section class="container-fluid scrolling" id="blog-article-header"></section>
