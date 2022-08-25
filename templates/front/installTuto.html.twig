@@ -4,7 +4,8 @@
 {% endblock stylesheets %}
 
 {% block title %}Le Blog de DB | {{ tuto.name }}{% endblock %}
-{% block description %}{{ tuto.describeContent }}{% endblock %}
+{% block description %}{{ tuto.describeContent|striptags|u.truncate(200)|raw }}{% endblock %}
+{% block robot %}index, nofollow{% endblock %}
 {% block body %}
     <div class="col-md-10 offset-md-1">
         <h1>Comment installer un site réalisé php/symfony 5 et comme base de données

@@ -1,7 +1,8 @@
 {% extends 'base-arrow.html.twig' %}
 
 {% block title %}Le Blog de DB | {{ tuto.name }}{% endblock %}
-{% block description %}{{ tuto.describeContent }}{% endblock %}
+{% block description %}{{ tuto.describeContent|striptags|u.truncate(200)|raw }}{% endblock %}
+{% block robot %}noindex, nofollow{% endblock %}
 {% block body %}
     <section class="container-fluid">
         <div class="container">
