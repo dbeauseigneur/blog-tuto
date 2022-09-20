@@ -30,7 +30,7 @@ class MainController extends AbstractController
 		$carouselArticles = $postRepository->getLastSixArticles(6);
 
 		if ($theme === '') {
-			return $this->redirectToRoute('homepage', ['theme' => ($this->getParameter('default-theme'))]);
+			return $this->render('front/start.html.twig');
 		}
 		return $this->render('front/index.html.twig', ['theme' => $theme, 'carouselArticles' => $carouselArticles]);
 	}

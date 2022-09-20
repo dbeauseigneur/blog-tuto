@@ -19,8 +19,6 @@ function replace() {
 }
 
 $(document).ready(function () {
-    console.log($(document).height());
-    console.log($("div.body-gen").outerHeight());
     replace();
 });
 
