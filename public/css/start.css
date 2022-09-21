@@ -19,6 +19,11 @@
 
 #left {
 	background-color: snow;
+	color: #3dd5f3;
+}
+
+#left:hover {
+	color: #2aa3b2
 }
 
 #right-container {
@@ -32,7 +37,7 @@
 }
 
 #right:hover {
-	color: lightgrey;
+	color: #b0b0b0;
 }
 
 h1 {
