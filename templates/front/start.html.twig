@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Mon site perso{% endblock %}</title>
+    <meta name="description"
+          content="{% block description %}Mo site perso est là pour montrer mon savoir faire et mes connaissances en informatique{% endblock %}">
+    <meta name="robot" content="{% block robot %}index, follow{% endblock %}">
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/fontawesome/css/all.min.css') }}" rel="stylesheet">
+    {{ encore_entry_link_tags('app') }}
+
+    {% block stylesheets %}
+        <link href="{{ asset('/css/start.css') }}" rel="stylesheet">
+    {% endblock %}
+
+    <script src="{{ asset('js/jquery-3.6.1.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+    {{ encore_entry_script_tags('app') }}
+    {% block javascripts %}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    {% set currentRoute = app.request.attributes.get('_route') %}
+    {% set newParamsLight = app.request.attributes.get('_route_params') %}
+    {% set newParamsLight = newParamsLight|merge({'theme' : 'cerulean'}) %}
+    {% set newParamsDark = app.request.attributes.get('_route_params') %}
+    {% set newParamsDark = newParamsDark|merge({'theme' : 'darkly'}) %}
+    <div id="left-container" class="block">
+        <a id="left-link" href="{{ path(currentRoute,newParamsLight,true ) }}">
+            <div id="left" class="part">
+                <h1>Choisissez votre expérience</h1>
+            </div>
+        </a>
+    </div>
+    <div id="right-container" class="block">
+        <a id="right-link" href="{{ path(currentRoute,newParamsDark,true ) }}">
+            <div id="right" class="part">
+                <h1>Choisissez votre expérience</h1>
+            </div>
+        </a>
+    </div>
+{% endblock %}
+</body>

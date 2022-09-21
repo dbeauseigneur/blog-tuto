@@ -1,0 +1,44 @@
+.block {
+	height: 100%;
+	top: 0;
+	position: absolute;
+	display: flex;
+	overflow: auto;
+}
+
+.part {
+	height: 100%;
+	width: 100vw;
+	display: flex;
+}
+
+#left-container {
+	width: 50%;
+	z-index: 1;
+}
+
+#left {
+	background-color: snow;
+}
+
+#right-container {
+	width: 100%;
+	z-index: 0;
+}
+
+#right {
+	background-color: #101010;
+	color: whitesmoke;
+}
+
+#right:hover {
+	color: lightgrey;
+}
+
+h1 {
+	margin: auto;
+}
+
+a {
+	text-decoration: none;
+}
