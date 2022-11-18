@@ -77,4 +77,20 @@ class TutoController extends AbstractController
 			'tuto' => $tuto
 		]);
 	}
+
+	/**
+	 * @route("/geotiff-data",name = "geotiffData")
+	 * @param ManagerRegistry $doctrine
+	 * @param string $theme
+	 * @return Response
+	 */
+	public function geotiffData(ManagerRegistry $doctrine, string $theme): Response
+	{
+		$em = $doctrine->getManager();
+		$tuto = $em->getRepository(Tuto::class)->findOneBy(['url' => 'install']);
+		return $this->render('front/geotiffData.html.twig', [
+			'theme' => $theme,
+			'tuto' => $tuto
+		]);
+	}
 }
