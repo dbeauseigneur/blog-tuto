@@ -1,0 +1,317 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('/css/ol.css') }}" rel="stylesheet">
+    <style>
+		.map {
+			left: 10%;
+			width: 80%;
+			height: 60vh;
+			position: relative;
+		}
+
+		.italic {
+			font-style: italic;
+			color: lightgrey;
+		}
+    </style>
+{% endblock stylesheets %}
+{% block javascripts %}
+    <script src="https://unpkg.com/elm-pep@1.0.6/dist/elm-pep.js"></script>
+    <script type="module" src="{{ asset('js/tuto-geotiff-data/index.ffa04d62.js') }}"></script>
+{% endblock %}
+
+{% block title %}Le Blog de DB | {{ tuto.name }}{% endblock %}
+{% block description %}{{ tuto.describeContent|striptags|u.truncate(200)|raw }}{% endblock %}
+{% block robot %}index, nofollow{% endblock %}
+{% block body %}
+    <div class="col-md-10 offset-md-1">
+        <h1>Comment accéder aux données flottantes d'un fichier geotiff avec openLayer</h1>
+        <div id="map" class="map"></div>
+        <div class="row">
+            <div class="col-md-4">Localisation : <span id="mouse-position"></span></div>
+            <div class="col-md-4">Altitude à partir de la couleur : <span id="altitude-label"></span></div>
+            <div class="col-md-4">Altitude à partir des données du geotiff : <span id="altitude-tif-label"></span></div>
+        </div>
+        <p>Système de projection du geotiff : <span id="projection-label"></span></p>
+        <h2>Les références et information</h2>
+        <p>Les fichiers sources viennent de la conversion des fichiers ASC fournit par l'IGN en geotiff(float32 et
+            données compressées).</p>
+        <p>Le fond de carte est le fond open streetmap standard, le tout projeté en RGF 93.</p>
+        <p>Le code utilise OpenLayer en version 7.1 et geotiff.js en dernière version</p>
+        <p>Le code ne fonctionne que si la projection est la même que les geotiffs, toutefois avec une petite adaptation
+            il est possible de récupérer la donnée
+            d'origine en utilisant proj4.js</p>
+        <h2>La config serveur pour le répertoire contenant les tiffs</h2>
+        <p>Cette config est nécessaire pour la lecture partielle des geotiff. C'est un besoin spécifique à la lecture
+            des geotiff par url</p>
+        <div class="card text-white bg-dark">
+            <div class="card-header">Dans le fichier de config serveur apache2</div>
+            <div class="card-body">
+                <div class="card-text">
+            <pre class="bg-dark"><code class="card-text">&lt;Directory <span class="italic">votre chemin de stockage sur le serveur</span>/range&gt;
+            AllowOverride None
+            Order Allow,Deny
+            Allow from All
+            &lt;IfModule mod_headers.c&gt;
+                    #<span class="italic">nécessaire si le site d'utilisation n'est pas sur le même site</span>
+                    Header set Access-Control-Allow-Origin "*"
+                    Header add Access-Control-Allow-Headers: "Content-Type, Range"
+                    Header add Access-Control-Allow-Methods: "HEAD,GET,POST,OPTIONS"
+                    Header add Access-Control-Allow-Methods: "authorization"
+            &lt;/IfModule&gt;
+&lt;/Directory></code></pre>
+                </div>
+            </div>
+        </div>
+        <h2>La partie côté client(navigateur)</h2>
+        <p>L'utilisation des rasters tiff est montré dans les exemples d'open layer je n'y reviendrais pas. Toutefois,
+            il faut tenir compte de l'utilisation des méthodes asynchrone pour y arriver et de promise pour simplifier
+            la lecture et l'écriture j'utilise donc une fonction asynchrone pour la génération de la carte</p>
+        <p>Dans les exemples d'utilisation d'openLayer geoTiff il existe 2 méthodes d'utilisations des fichiers, les
+            deux sont utilisées
+            pour déterminer les différences d'affichages. La différence des méthodes se voit dès l'affichage des
+            données, mais l'importance
+            est ailleurs l'importance, c'est la méthode de lecture du fichier en 1 bloc(blob) ou par morceau(url).</p>
+        <div class="card bg-secondary">
+            <div class="card-header">Main.js</div>
+            <div class="card-body">
+                <div class="card-text">
+            <pre>
+<code><span class="text-muted">/*** Les Imports ***/</span>
+import GeoTIFF from 'ol/source/GeoTIFF';
+import Map from 'ol/Map';
+import WebGLTileLayer from 'ol/layer/WebGLTile';
+import OSM from 'ol/source/OSM';
+import TileLayer from 'ol/layer/Tile';
+import View from 'ol/View';
+import proj4 from 'proj4';
+import MousePosition from 'ol/control/MousePosition';
+import {register} from 'ol/proj/proj4';
+import {createStringXY} from 'ol/coordinate';
+import {defaults as defaultControls} from 'ol/control';
+import {fromBlob, fromUrl} from "geotiff";
+
+<span class="text-muted">/***la fonction principale***/</span>
+<span class="text-muted">/*Préparer l'ensemble en fonction asynchrone pour permettre l'attente des données*/</span>
+export let mainPrg = async function (mousePosition,targetMap,realAltitudeLabel,altitudeLabel) {
+<span class="text-muted">/***la gestion de la projection locale RGF(93) EPSG:2154***/</span>
+    proj4.defs("EPSG:2154", "+proj=lcc +lat_0=46.5 +lon_0=3 +lat_1=49 +lat_2=44 +x_0=700000 +y_0=6600000
+            +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs +type=crs");
+    register(proj4);
+        const mousePositionControl = new MousePosition({
+        coordinateFormat: createStringXY(3),
+        projection: 'EPSG:2154',
+        // comment the following two lines to have the mouse position
+        // be placed within the map.
+        className: 'custom-mouse-position',
+        target: document.getElementById('mouse-position'),
+    });
+    <span class="text-muted">/* Couche de fond */</span>
+    let lyr_OSMStandard_0 = new TileLayer({
+        source: new OSM(),
+    });
+
+    <span class="text-muted">/*Obtention du blob*/</span>
+    let response = await fetch('https://www.blog-db.fr/images/range/test-sud.tif')
+    const blob20 = await response.blob()
+    const sourceSud = new GeoTIFF({
+        sources: [
+            {
+                blob: blob20,
+            },
+        ],
+    });
+    <span class="text-muted">/*Création de la source nord, NB il est possible de récupérer les données par url.</span>
+    <span class="text-muted">Avec le blob on lit le fichier en une fois et les données seront utilisées par</span>
+    <span class="text-muted">openlayers et pour l'obtention de l'altitude (valeur obtenue au plus près).</span>
+    <span class="text-muted">Le chargement des données en 1 seule fois.</span>
+    <span class="text-muted">Avec l'URL on lit le fichier morceau par morceau d'où l'importance du Range côté serveur.</span>
+    <span class="text-muted">Le hic c'est que le chargement se fait pour openLayer et pour l'obtention de l\'altitude.</span>
+    <span class="text-muted">Le chargement des données complètes pourra être faite 2 fois(mais le chargement est limité au besoin).*/</span>
+    const urlNord = 'https://www.blog-db.fr/images/range/test-nord.tif';
+    const sourceNord = new GeoTIFF({
+        sources: [
+            {
+                url: urlNord,
+            },
+        ],
+        interpolate: false,
+        sourceOptions: {
+            allowFullFile: true,
+        }
+    });
+    <span class="text-muted">/*Création des couches à partir des couches*/</span>
+    let layerSud = new WebGLTileLayer({
+        source: sourceSud
+    });
+    let layerNord = new WebGLTileLayer({
+        source: sourceNord,
+    });
+    <span class="text-muted">/***Création de la vue***/</span>
+    let tryView = new View({
+        projection: 'EPSG:2154',
+        center: [855500, 6520000],
+        zoom: 15,
+    });
+    <span class="text-muted">/***Création de la carte***/</span>
+    const map = new Map({
+        controls: defaultControls().extend([mousePositionControl]),
+        target: targetMap,
+        layers: [
+            lyr_OSMStandard_0,
+            layerNord,
+            layerSud,
+        ],
+        view: tryView
+    });
+    <span class="text-muted">/***Lecture du Tiff contenu dans le blob***/</span>
+    const tiffSud = await fromBlob(blob20);
+    const imageSud = await tiff.getImage();
+
+    <span class="text-muted">/***Lecture des informations (métadata)***/</span>
+    const originSud = image.getOrigin();
+    const resolutionSud = image.getResolution();
+    const geoKeysSud = image.getGeoKeys();
+    const projectionSud = geoKeysSud.ProjectedCSTypeGeoKey+ ' : ' + geoKeysSud.GTCitationGeoKey;
+
+    <span class="text-muted">/***Lecture des données de l\'image***/></span>
+    const dataSud = await image.readRasters();
+    const widthSud = await dataSud.width;
+    <span class="text-muted">/***Calcul de la coordonnée du centre du point haut et gauche du geotiff***/</span>
+    const originSudRefX = origin[0] + resolution[0] / 2;
+    const originSudRefY = origin[1] + resolution[1] / 2;
+
+    <span class="text-muted">/***données nord***/</span>
+    const tiffNord = await fromUrl(urlNord);
+    const imageNord = await tiffNord.getImage();
+    const originNord = imageNord.getOrigin();
+    const resolutionNord = imageNord.getResolution();
+    let geoKeysNord = imageNord.getGeoKeys();
+    const projectionNord = geoKeysNord.ProjectedCSTypeGeoKey + ' : ' + geoKeysNord.GTCitationGeoKey;
+    const originNordRefX = originNord[0] + resolutionNord[0] /2;
+    const originNordRefY = originNord[1] + resolutionNord[1] /2;
+
+    <span class="text-muted">/***Création de la gestion au déplacement du curseur***/</span>
+    map.on('pointermove', async (event) => {
+        <span class="text-muted">/***Obtention des coordonnées dans le système de projection de la map***/</span>
+        let x = event.coordinate[0];
+        let y = event.coordinate[1];
+
+        <span class="text-muted">/***Initialisation des valeurs***/</span>
+        let chooseLayer = layerSud;
+        projectionLabel.innerHTML = '';
+
+        <span class="text-muted">/***Si la couche layerNord est présente sur le pixel***/</span>
+        if (layerNord.getData(event.pixel) && layerNord.getData(event.pixel)[0]) {
+            chooseLayer = layerNord;
+            <span class="text-muted">/***Calcul des coordonnées dans l'image***/</span>
+            let coordXImage = Math.round((x - originNordRefX) / resolutionNord[0]);
+            let coordYImage = Math.round((y - originNordRefY) / resolutionNord[1]);
+            <span class="text-muted">/***Paramétrage du formatage***/</span>
+            let int4 = new Intl.NumberFormat("fr-FR", {maximumFractionDigits: 2, minimumFractionDigits: 2});
+            let options;
+            projectionLabel.innerHTML = projectionNord;
+            <span class="text-muted">/***Lecture des  données nécessaires***/</span>
+            options = {
+                window: [coordXImage, coordYImage, coordXImage+1, coordYImage+1],
+                width:1,
+                height:1
+            };
+            let dataPixel = await imageNord.readRasters(options);
+            <span class="text-muted">/***Affichage de la donnée du pixel***/</span>
+            realAltitudeLabel.innerHTML = int4.format(dataPixel[0][0]).toString();
+        <span class="text-muted">/***Si la couche layerSud est présente sur le pixel***/</span>
+        } else if (layerSud.getData(event.pixel) && layerSud.getData(event.pixel)[0]) {
+            let coordXImage = Math.round((x - originSudRefX) / resolution[0]);
+            let coordYImage = Math.round((y - originSudRefY) / resolution[1]);
+            projectionLabel.innerHTML = projectionSud;
+            let int4 = new Intl.NumberFormat("fr-FR", {maximumFractionDigits: 2, minimumFractionDigits: 2});
+            <span class="text-muted">/*** Affichage de la donnée du pixel ***/</span>
+            realAltitudeLabel.innerHTML = int4.format(data[0][widthSud * coordYImage + coordXImage]).toString();
+        <span class="text-muted">/*** Si aucune couche est présente sur le pixel ***/</span>
+        } else {
+            realAltitudeLabel.innerHTML = 'no data';
+            altitudeLabel.innerHTML = 'no data';
+        }
+        <span class="text-muted">/*** Données avec les valeurs des pixels ***/</span>
+        if (chooseLayer.getData(event.pixel)) {
+            let maximum = chooseLayer.getSource().metadata_[0][0].STATISTICS_MAXIMUM;
+            let minimum = chooseLayer.getSource().metadata_[0][0].STATISTICS_MINIMUM;
+            let rapport = (maximum - minimum) / 255;
+            <span class="text-muted">/*** Utilisation des données du pixel ***/</span>
+            let altitudeCalc = rapport * chooseLayer.getData(event.pixel)[0] + (1.0 * minimum);
+            altitudeLabel.innerHTML = altitudeCalc.toFixed(2).toString();
+        }
+    });
+}
+let altitudeLabel = document.getElementById('altitude-label');
+let realAltitudeLabel = document.getElementById('altitude-tif-label');
+let mousePosition = document.getElementById('mouse-position');
+let targetMap = 'map';
+let projectionLabel = document.getElementById('projection-label')
+mainPrg(mousePosition,targetMap,realAltitudeLabel,altitudeLabel,projectionLabel).then((test=>{console.log('loaded')}));
+</code></pre>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="card bg-secondary">
+            <div class="card-header">index.html</div>
+            <div class="card-body">
+                <div class="card-text">
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;UTF-8&quot;&gt;
+	&lt;title&gt;Cloud Optimized GeoTIFF (COG)&lt;/title&gt;
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;cog_fichiers/ol.css&quot;&gt;
+	&lt;style&gt;
+		.map {
+			width: 80%;
+			height: 60vh;
+		}
+	&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h4&gt;&lt;/h4&gt;
+&lt;div id=&quot;map&quot; class=&quot;map&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;mouse-position&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;projection-label&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;altitude-label&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;altitude-tif-label&quot;&gt;&lt;/div&gt;
+
+&lt;!-- Pointer events polyfill for old browsers, see https://caniuse.com/#feat=pointer --&gt;
+&lt;script src=&quot;https://unpkg.com/elm-pep@1.0.6/dist/elm-pep.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;module&quot; src=&quot;cog_fichiers/final.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="card bg-secondary">
+            <div class="card-header">package.json</div>
+            <div class="card-body">
+                <div class="card-text">
+            <pre>{
+  "name": "cog",
+  "dependencies": {
+    "geotiff": "^2.0.5",
+    "ol": "7.1.0",
+    "proj4": "^2.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "latest",
+    "vite": "^3.0.3"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  }
+}</pre>
+                </div>
+            </div>
+        </div>
+        <br/>
+    </div>
+{% endblock %}
