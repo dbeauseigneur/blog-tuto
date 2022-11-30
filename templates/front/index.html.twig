@@ -25,13 +25,15 @@
                 <!--CARROUSEL BLOG-->
                 <div class="row">
                     <div class="col-md-12" data-wow-delay="0.2s">
-                        <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                        <div id="carouselBlog" class="carousel slide" data-ride="carousel">
                             <!-- Carousel Slides / Quotes -->
                             <div class="carousel-inner text-center">
-
                                 <!-- Quotes -->
+                                {% set start = true %}
                                 {% for post in carouselArticles %}
-                                    <div class="item carouselIndex">
+
+                                    <div class="carousel-item {% if (start) %}active{% set start = false %}{% endif %}">
+
                                         <blockquote>
                                             <div class="row">
                                                 <div class="col-sm-8 offset-sm-2 col-xs-10 offset-xs-1">
@@ -46,11 +48,13 @@
                                 {% endfor %}
                             </div>
                             <!-- Carousel Buttons Next/Prev -->
-                            <a data-slide="prev" href="#quote-carousel" class="carousel-control-prev" role="button">
+                            <a data-slide="prev" class="carousel-control-prev" type="button"
+                               data-bs-target="#carouselBlog" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a data-slide="next" href="#quote-carousel" class="carousel-control-next" role="button">
+                            <a data-slide="next" class="carousel-control-next" type="button"
+                               data-bs-target="#carouselBlog" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
