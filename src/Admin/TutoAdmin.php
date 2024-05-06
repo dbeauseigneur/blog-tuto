@@ -22,10 +22,13 @@ class TutoAdmin extends AbstractAdmin
 	{
 		$form->add('name', TextType::class, ['label' => 'titre'])
 			->add('url', TextType::class, ['label' => 'nom du lien', 'required' => false])
-			->add('describeContent', CKEditorType::class,
+			->add(
+				'describeContent',
+				CKEditorType::class,
 				[
 					'label' => 'contenu',
-				])
+				]
+			)
 			->add('published', CheckboxType::class, ['required' => false]);
 	}
 
@@ -57,10 +60,13 @@ class TutoAdmin extends AbstractAdmin
 	{
 		$show->add('name')
 			->add('url')
-			->add('describeContent', CKEditorType::class,
+			->add(
+				'describeContent',
+				CKEditorType::class,
 				[
 					'label' => 'contenu',
-				])
+				]
+			)
 			//->add('Date',DateTimeType::class, ['format' => 'yyyy-MM-dd hh:mm'])
 			->add('published', BooleanType::class);
 

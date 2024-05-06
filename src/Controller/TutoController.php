@@ -14,7 +14,6 @@ use App\Entity\Tuto;
  */
 class TutoController extends AbstractController
 {
-
 	private const MAX_PER_PAGE = 4;
 
 	/**

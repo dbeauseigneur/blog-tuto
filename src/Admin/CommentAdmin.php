@@ -16,7 +16,6 @@ use Sonata\AdminBundle\Route\RouteCollection;
  */
 class CommentAdmin extends AbstractAdmin
 {
-
 	// Fields to be shown on lists
 	protected function configureListFields(ListMapper $list): void
 	{
@@ -42,21 +41,30 @@ class CommentAdmin extends AbstractAdmin
 	protected function configureFormFields(FormMapper $form): void
 	{
 		$form
-			->add('approved', CheckboxType::class,
+			->add(
+				'approved',
+				CheckboxType::class,
 				array(
 					'label' => 'Valider ce commentaire',
 					'required' => false
-				))
-			->add('content', TextareaType::class,
+				)
+			)
+			->add(
+				'content',
+				TextareaType::class,
 				array(
 					'label' => 'Commentaire posté sur l\'article',
 					'disabled' => true
-				))
-			->add('myAnswer', TextareaType::class,
+				)
+			)
+			->add(
+				'myAnswer',
+				TextareaType::class,
 				array(
 					'label' => 'Répondre à ce commentaire',
 					'required' => false
-				));
+				)
+			);
 	}
 
 	protected function configureRoutes(RouteCollectionInterface $collection): void
@@ -65,4 +73,3 @@ class CommentAdmin extends AbstractAdmin
 	}
 
 }
-

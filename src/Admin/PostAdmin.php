@@ -21,18 +21,24 @@ class PostAdmin extends AbstractAdmin
 	protected function configureFormFields(FormMapper $form): void
 	{
 		$form->add('title', TextType::class, ['label' => 'titre'])
-			->add('categories', EntityType::class,
+			->add(
+				'categories',
+				EntityType::class,
 				[
 					'label' => 'catégories',
 					'class' => Category::class,
 					'choice_label' => 'categoryName',
 					'multiple' => true,
 					'expanded' => false,
-				])
-			->add('content', CKEditorType::class,
+				]
+			)
+			->add(
+				'content',
+				CKEditorType::class,
 				[
 					'label' => 'contenu',
-				])
+				]
+			)
 			->add('status', CheckboxType::class, ['required' => false])
 			->add('openComment', CheckboxType::class, ['required' => false]);
 	}
@@ -66,10 +72,13 @@ class PostAdmin extends AbstractAdmin
 	protected function configureShowFields(ShowMapper $show): void
 	{
 		$show->add('title')
-			->add('content', CKEditorType::class,
+			->add(
+				'content',
+				CKEditorType::class,
 				[
 					'label' => 'contenu',
-				])
+				]
+			)
 			->add('status', CheckboxType::class, ['required' => false])
 			->add('openComment', CheckboxType::class, ['required' => false]);
 	}

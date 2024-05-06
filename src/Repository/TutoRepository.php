@@ -17,7 +17,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TutoRepository extends ServiceEntityRepository
 {
-	const MAX_RESULT = 4;
+	public const MAX_RESULT = 4;
+
 	public function __construct(ManagerRegistry $registry)
 	{
 		parent::__construct($registry, Tuto::class);
@@ -65,28 +66,28 @@ class TutoRepository extends ServiceEntityRepository
 		return new Paginator($query);
 	}
 
-//    /**
-//     * @return Tuto[] Returns an array of Tuto objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+	//    /**
+	//     * @return Tuto[] Returns an array of Tuto objects
+	//     */
+	//    public function findByExampleField($value): array
+	//    {
+	//        return $this->createQueryBuilder('t')
+	//            ->andWhere('t.exampleField = :val')
+	//            ->setParameter('val', $value)
+	//            ->orderBy('t.id', 'ASC')
+	//            ->setMaxResults(10)
+	//            ->getQuery()
+	//            ->getResult()
+	//        ;
+	//    }
 
-//    public function findOneBySomeField($value): ?Tuto
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+	//    public function findOneBySomeField($value): ?Tuto
+	//    {
+	//        return $this->createQueryBuilder('t')
+	//            ->andWhere('t.exampleField = :val')
+	//            ->setParameter('val', $value)
+	//            ->getQuery()
+	//            ->getOneOrNullResult()
+	//        ;
+	//    }
 }

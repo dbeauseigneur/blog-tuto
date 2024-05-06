@@ -19,15 +19,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Gregwar\CaptchaBundle\Type\CaptchaType;
 
-
 /**
  * Category controller.
  * @route("/{theme<%themes%>}/blog")
  */
 class CategoryController extends AbstractController
 {
-
-	const MAX_PER_PAGE = 4;
+	public const MAX_PER_PAGE = 4;
 
 	/**
 	 * @param string $theme
