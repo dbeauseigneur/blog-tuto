@@ -5,47 +5,31 @@ namespace App\Entity;
 use App\Repository\TutoRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=TutoRepository::class)
- */
+#[ORM\Entity(repositoryClass: TutoRepository::class)]
 class Tuto
 {
-	/**
-	 * @ORM\Id
-	 * @ORM\GeneratedValue
-	 * @ORM\Column(type="integer")
-	 */
-	private $id;
+	#[ORM\Id]
+	#[ORM\GeneratedValue]
+	#[ORM\Column(type: 'integer')]
+	private int $id;
 
-	/**
-	 * @ORM\Column(type="string", length=50)
-	 */
-	private $name;
+	#[ORM\Column(type: 'string', length: 50)]
+	private ?string $name;
 
-	/**
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $url;
+	#[ORM\Column(type: 'string', length: 255)]
+	private ?string $url;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	private $describeContent;
+	#[ORM\Column(type: 'text')]
+	private ?string $describeContent;
 
-	/**
-	 * @ORM\Column(type="string", length=60, nullable=true)
-	 */
-	private $nameUrl;
+	#[ORM\Column(type: 'string', length: 60, nullable: true)]
+	private ?string $nameUrl;
 
-	/**
-	 * @ORM\Column(type="datetime", nullable=true)
-	 */
-	private $date;
+	#[ORM\Column(type: 'datetime', nullable: true)]
+	private ?\DateTimeInterface $date;
 
-	/**
-	 * @ORM\Column(type="boolean")
-	 */
-	private $published;
+	#[ORM\Column(type: 'boolean')]
+	private ?bool $published;
 
 	public function getId(): ?int
 	{

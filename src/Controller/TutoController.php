@@ -63,7 +63,7 @@ class TutoController extends AbstractController
 		]);
 	}
 
-	#[Route('/install, name: install')]
+	#[Route('/install', name: 'install')]
 	/**
 	 * @param ManagerRegistry $doctrine
 	 * @param string $theme

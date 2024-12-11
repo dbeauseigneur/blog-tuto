@@ -7,57 +7,37 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=PostRepository::class)
- */
+#[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
 {
-	/**
-	 * @ORM\Id
-	 * @ORM\GeneratedValue
-	 * @ORM\Column(type="integer")
-	 */
-	private $id;
+	#[ORM\Id]
+	#[ORM\GeneratedValue]
+	#[ORM\Column(type: 'integer')]
+	private int $id;
 
-	/**
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $title;
+	#[ORM\Column(type: 'string', length: 255)]
+	private ?string $title;
 
-	/**
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $link;
+	#[ORM\Column(type: 'string', length: 255)]
+	private ?string $link;
 
-	/**
-	 * @ORM\Column(type="datetime", nullable=true)
-	 */
-	private $publicationDate;
+	#[ORM\Column(type: 'datetime', nullable: true)]
+	private ?\DateTimeInterface $publicationDate;
 
-	/**
-	 * @ORM\Column(type="text", nullable=true)
-	 */
-	private $content;
+	#[ORM\Column(type: 'text', nullable: true)]
+	private ?string $content;
 
-	/**
-	 * @ORM\Column(type="boolean", nullable=true)
-	 */
-	private $openComment;
+	#[ORM\Column(type: 'boolean', nullable: true)]
+	private bool $openComment;
 
-	/**
-	 * @ORM\Column(type="boolean", nullable=true)
-	 */
-	private $status;
+	#[ORM\Column(type: 'boolean', nullable: true)]
+	private ?bool $status;
 
-	/**
-	 * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="postId")
-	 */
-	private $comments;
+	#[ORM\OneToMany(mappedBy: 'postId', targetEntity: Comment::class)]
+	private Collection $comments;
 
-	/**
-	 * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="posts")
-	 */
-	private $categories;
+	#[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'posts')]
+	private Collection $categories;
 
 	public function __construct()
 	{

@@ -5,59 +5,39 @@ namespace App\Entity;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=CommentRepository::class)
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\Entity(repositoryClass: CommentRepository::class)]
+#[ORM\HasLifecycleCallbacks()]
 class Comment
 {
-	/**
-	 * @ORM\Id
-	 * @ORM\GeneratedValue
-	 * @ORM\Column(type="integer")
-	 */
-	private $id;
+	#[ORM\Id]
+	#[ORM\GeneratedValue]
+	#[ORM\Column(type: 'integer')]
+	private int $id;
 
-	/**
-	 * @ORM\Column(type="string", length=40)
-	 */
-	private $author;
+	#[ORM\Column(type: 'string', length: 40)]
+	private ?string $author;
 
-	/**
-	 * @ORM\Column(type="string", length=50)
-	 */
-	private $authorEmail;
+	#[ORM\Column(type: 'string', length: 50)]
+	private ?string $authorEmail;
 
-	/**
-	 * @ORM\Column(type="string", length=150, nullable=true)
-	 */
-	private $title;
+	#[ORM\Column(type: 'string', length: 150, nullable: true)]
+	private ?string $title;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	private $content;
+	#[ORM\Column(type: 'text')]
+	private ?string $content;
 
-	/**
-	 * @ORM\Column(type="datetime")
-	 */
-	private $date;
+	#[ORM\Column(type: 'datetime')]
+	private ?\DateTimeInterface $date;
 
-	/**
-	 * @ORM\Column(type="boolean")
-	 */
-	private $approved = false;
+	#[ORM\Column(type: 'boolean')]
+	private ?bool $approved = false;
 
-	/**
-	 * @ORM\Column(type="text", nullable=true)
-	 */
-	private $myAnswer;
+	#[ORM\Column(type: 'text', nullable: true)]
+	private ?string $myAnswer;
 
-	/**
-	 * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
-	 * @ORM\JoinColumn(nullable=false)
-	 */
-	private $postId;
+	#[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'comments')]
+	#[ORM\JoinColumn(nullable: false)]
+	private ?Post $postId;
 
 	public function getId(): ?int
 	{
@@ -160,9 +140,7 @@ class Comment
 		return $this;
 	}
 
-	/**
-	 * @ORM\PrePersist
-	 **/
+	#[ORM\PrePersist]
 	public function setDateValue(): void
 	{
 		$this->date = new \DateTime();
