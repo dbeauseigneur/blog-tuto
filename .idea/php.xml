@@ -196,9 +196,10 @@
       <path value="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder" />
       <path value="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />
   </component>

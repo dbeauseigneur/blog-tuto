@@ -4,25 +4,27 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Tuto;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Category controller.
- * @route("/{theme<%themes%>}/tuto")
  */
+#[Route ('/{theme<%themes%>}/tuto')]
+
 class TutoController extends AbstractController
 {
 	private const MAX_PER_PAGE = 4;
 
+	#[Route('/{page<d+>}', name: 'tutos')]
 	/**
 	 * @param string $theme
 	 * @param ManagerRegistry $doctrine
 	 * @param int $page
 	 * @return Response
-	 * @Route("/{page<d+>}", name="tutos")
 	 */
+
 	public function filterIndex(string $theme, ManagerRegistry $doctrine, int $page = 1): Response
 	{
 		$em = $doctrine->getManager();
@@ -45,11 +47,11 @@ class TutoController extends AbstractController
 		));
 	}
 
+	#[Route(path: '/test', name: 'test')]
 	/**
 	 * @param ManagerRegistry $doctrine
 	 * @param string $theme
 	 * @return Response
-	 * @route("/test",name = "test")
 	 */
 	public function testTuto(ManagerRegistry $doctrine, string $theme): Response
 	{
@@ -61,12 +63,13 @@ class TutoController extends AbstractController
 		]);
 	}
 
+	#[Route('/install, name: install')]
 	/**
 	 * @param ManagerRegistry $doctrine
 	 * @param string $theme
 	 * @return Response
-	 * @route("/install",name = "install")
 	 */
+
 	public function installTuto(ManagerRegistry $doctrine, string $theme): Response
 	{
 		$em = $doctrine->getManager();
@@ -77,8 +80,8 @@ class TutoController extends AbstractController
 		]);
 	}
 
+	#[Route('/geotiff-data', name: 'geotiffData')]
 	/**
-	 * @route("/geotiff-data",name = "geotiffData")
 	 * @param ManagerRegistry $doctrine
 	 * @param string $theme
 	 * @return Response
@@ -92,4 +95,6 @@ class TutoController extends AbstractController
 			'tuto' => $tuto
 		]);
 	}
+
+
 }

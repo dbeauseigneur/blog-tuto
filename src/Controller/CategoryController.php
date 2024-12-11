@@ -4,24 +4,16 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\Comment;
 use App\Repository\PostRepository;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Post;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Gregwar\CaptchaBundle\Type\CaptchaType;
+
+#[route('/{theme<%themes%>}/blog')]
 
 /**
  * Category controller.
- * @route("/{theme<%themes%>}/blog")
  */
 class CategoryController extends AbstractController
 {
@@ -33,8 +25,9 @@ class CategoryController extends AbstractController
 	 * @param ManagerRegistry $doctrine
 	 * @param int $page
 	 * @return Response
-	 * @route("/categorie/{slug}/{page}",name="category_blog")
 	 */
+	#[route('/categorie/{slug}/{page}', name: 'category_blog')]
+
 	public function filterIndex(string $theme, Category $category, ManagerRegistry $doctrine, int $page = 1): Response
 	{
 		$em = $doctrine->getManager();
