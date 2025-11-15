@@ -13,16 +13,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class MainController extends AbstractController
 {
-	/**
-	 * @Route("/{theme<%themes%>}", name="homepage")
-	 */
+	#[Route('/{theme<%themes%>}', name: 'homepage')]
+
 	public function main(string $theme, ManagerRegistry $doctrine): Response
 	{
 		$em = $doctrine->getManager();
@@ -35,9 +33,9 @@ class MainController extends AbstractController
 		return $this->render('front/index.html.twig', ['theme' => $theme, 'carouselArticles' => $carouselArticles]);
 	}
 
-	/**
-	 * @Route("/{theme<%themes%>}/a-propos", name="a_propos")
-	 */
+
+	#[Route('/{theme<%themes%>}/a-propos', name: 'a_propos')]
+
 	public function aPropos(string $theme): Response
 	{
 		if ($theme === '') {
@@ -46,10 +44,7 @@ class MainController extends AbstractController
 		return $this->render('front/a-propos.html.twig', ['theme' => $theme]);
 	}
 
-	/**
-	 * @Route("/{theme<%themes%>}/contact", name="contact")
-	 * @throws TransportExceptionInterface
-	 */
+	#[Route('/{theme<%themes%>}/contact', name: 'contact')]
 	public function contact(MailerInterface $message, Request $request, string $theme): Response
 	{
 		if ($theme === '') {
@@ -91,9 +86,7 @@ class MainController extends AbstractController
 		return $this->render('front/contact.html.twig', ['theme' => $theme, 'form' => $form->createView()]);
 	}
 
-	/**
-	 * @Route("/{theme<%themes%>}/mention", name="mentions")
-	 */
+	#[Route('/{theme<%themes%>}/mention', name: 'mentions')]
 	public function mention(string $theme): Response
 	{
 		if ($theme === '') {

@@ -8,10 +8,8 @@ use app\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Post;
 use Symfony\Component\Mailer\MailerInterface;
@@ -20,9 +18,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Gregwar\CaptchaBundle\Type\CaptchaType;
 
-/**
- * @Route("/{theme<%themes%>}/blog")
- */
+
+#[Route('/{theme<%themes%>}/blog')]
 class PostController extends AbstractController
 {
 	/**
@@ -31,9 +28,7 @@ class PostController extends AbstractController
 	 */
 	private const MAX_PER_PAGE = 4;
 
-	/**
-	 * @Route("/{page<d+>}", name="blog")
-	 */
+	#[Route('/{page<d+>}', name: 'blog')]
 	public function index(string $theme, ManagerRegistry $doctrine, int $page = 1): Response
 	{
 
@@ -63,8 +58,9 @@ class PostController extends AbstractController
 
 	}
 
+
+	#[Route ('/{link}', name: 'article_blog')]
 	/**
-	 * @route ("/{link}", name="article_blog")
 	 * @param MailerInterface $message
 	 * @param ManagerRegistry $doctrine
 	 * @param Post $post
@@ -86,8 +82,8 @@ class PostController extends AbstractController
 			->add('captcha', CaptchaType::class)
 			->getForm();// for valid captcha
 		$formComment->handleRequest($request);
+		$em = $doctrine->getManager();
 		if ($formComment->isSubmitted() && $formComment->isValid()) {
-			$em = $doctrine->getManager();
 			$em->persist($comment);
 			$em->flush();
 
@@ -110,7 +106,6 @@ class PostController extends AbstractController
 			return $this->redirectToRoute('article_blog', array('link' => $post->getLink(), 'theme' => $theme));
 		}
 
-		$em = $doctrine->getManager();
 		$archive = $em->getRepository(Post::class)->getAllOrderByDate();
 		$categories = $em->getRepository(Category::class)->getAllOrderByName();
 		$comments = $post->getComments();
