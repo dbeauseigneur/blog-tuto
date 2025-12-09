@@ -56,7 +56,7 @@ class TutoController extends AbstractController
 	public function testTuto(ManagerRegistry $doctrine, string $theme): Response
 	{
 		$em = $doctrine->getManager();
-		$tuto = $em->getRepository(Tuto::class)->findOneBy(['url' => 'test']);
+		$tuto = $em->getRepository(Tuto::class)->findOneBy(['url' => 'rasterpng']);
 		return $this->render('front/testTuto.html.twig', [
 			"theme" => $theme,
 			"tuto" => $tuto
