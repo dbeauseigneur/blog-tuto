@@ -101,11 +101,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	/**
 	 * @see UserInterface
 	 */
-	public function eraseCredentials(): self
+	public function eraseCredentials(): void
 	{
 		// If you store any temporary, sensitive data on the user, clear it here
 		// $this->plainPassword = null;
-		return $this;
 	}
 
 	public function isVerified(): bool
